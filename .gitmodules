@@ -1,0 +1,3 @@
+[submodule "ITSec1_Crypto_Component"]
+	path = ITSec1_Crypto_Component
+	url = git@github.com:RobinDHBW/ITSec1_Crypto_Component.git
