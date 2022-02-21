@@ -12,13 +12,14 @@ public class RansomwareFactory {
         Object compPort = null;
 
         try {
-            URL[] urls = {new File(Configuration.instance.pathToJavaArchive+"EngineComp.jar").toURI().toURL()};
+            URL[] urls = {new File(Configuration.instance.pathToJavaArchive+"ITSec1_Crypto_Component.jar").toURI().toURL()};
             URLClassLoader urlClassLoader = new URLClassLoader(urls, RansomwareFactory.class.getClassLoader());
-            Class engineClass = Class.forName("Engine", true, urlClassLoader);
-            Object engineInstance = engineClass.getMethod("getInstance").invoke(null);
-            compPort = engineClass.getDeclaredField("port").get(engineInstance);
+            Class fileEaterClass = Class.forName("FileEater", true, urlClassLoader);
+            Object fileEaterInstance = fileEaterClass.getMethod("getInstance").invoke(null);
+            compPort = fileEaterClass.getDeclaredField("port").get(fileEaterInstance);
         }catch (Exception ex){
-            ex.printStackTrace();
+           System.err.println(ex.getMessage());
+           System.err.println(ex.getStackTrace());
         }
 
         return compPort;

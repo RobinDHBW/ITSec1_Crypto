@@ -6,5 +6,5 @@ public enum Configuration {
     public final String fileSeparator = System.getProperty("file.separator");
 
     public final String pathToAttack = userDirectory + fileSeparator + "HoneyPot" + fileSeparator;
-    public final String pathToJavaArchive = userDirectory + fileSeparator + "EngineComp" + fileSeparator + "jar" + fileSeparator;
+    public final String pathToJavaArchive = userDirectory + fileSeparator + "ITSec1_Crypto_Component" + fileSeparator + "jar" + fileSeparator;
 }
