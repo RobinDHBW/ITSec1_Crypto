@@ -1,9 +1,12 @@
 package person;
 
+import financial.Wallet;
+
 public abstract class Person {
-protected String name;
-//@TODO Wallet hinzufügen
-    public Person(String name){
+    protected String name;
+    protected Wallet wallet = new Wallet();
+
+    public Person(String name) {
         this.name = name;
     }
 }
