@@ -1,8 +1,8 @@
-package LeverageCom;
+package leverageCom;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
-import Configuration.Configuration;
+import configuration.Configuration;
 
 
 

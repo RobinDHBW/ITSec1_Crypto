@@ -1,4 +1,4 @@
-package Person;
+package person;
 
 public class ConsoleUser extends Person implements IConsoleUser{
 

@@ -1,4 +1,4 @@
-package Person;
+package person;
 
 public abstract class Person {
 protected String name;
