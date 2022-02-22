@@ -56,4 +56,10 @@ public class TestComponent {
         assertTrue(reflector.decrypt());
     }
 
+    @Test
+    public void testRename(){
+        reflector.setPath(ConfigurationUnitTest.instance.pathToAttack);
+        assertTrue(reflector.rename(".tst01", true));
+    }
+
 }
