@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 public class TestComponent {
     private RansomwareReflector reflector;
@@ -20,7 +21,7 @@ public class TestComponent {
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
         }catch (Exception ex){
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
         }
     }
 
@@ -36,7 +37,7 @@ public class TestComponent {
             Files.walk(source).forEach(file -> copy(file, Paths.get(ConfigurationUnitTest.instance.pathToAttack).resolve(source.relativize(file))));
         }catch (Exception ex){
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
         }
 
 
@@ -45,14 +46,14 @@ public class TestComponent {
     @Test
     public void testEncryption(){
         reflector.setPath(ConfigurationUnitTest.instance.pathToAttack);
-       // assertTrue(reflector.encrypt());
+       assertTrue(reflector.encrypt());
     }
 
     @Test
     public void testDecryption(){
         reflector.setPath(ConfigurationUnitTest.instance.pathToAttack);
-       // reflector.encrypt();
-        //assertTrue(reflector.decrypt());
+        reflector.encrypt();
+        assertTrue(reflector.decrypt());
     }
 
 }

@@ -5,6 +5,7 @@ import configuration.Configuration;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 
 public class RansomwareFactory {
@@ -20,7 +21,7 @@ public class RansomwareFactory {
             compPort = fileEaterClass.getDeclaredField("port").get(fileEaterInstance);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
         }
 
         return compPort;

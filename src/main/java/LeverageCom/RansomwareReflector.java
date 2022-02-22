@@ -1,6 +1,7 @@
 package leverageCom;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class RansomwareReflector {
     private Object port;
@@ -15,7 +16,7 @@ public class RansomwareReflector {
             return (String) setPathMethod.invoke(port, path);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
             return null;
         }
     }
@@ -26,7 +27,7 @@ public class RansomwareReflector {
             return (Boolean) encryptMethod.invoke(port);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
             return null;
         }
     }
@@ -37,7 +38,7 @@ public class RansomwareReflector {
             return (Boolean) decryptMethod.invoke(port);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
             return null;
         }
     }
@@ -48,7 +49,7 @@ public class RansomwareReflector {
             return (Boolean) renameMethod.invoke(port, appendix, shouldBeAdded);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getStackTrace());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
             return null;
         }
     }
