@@ -4,7 +4,7 @@ import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.TextColor;
 
-public class ConsoleUser extends Person implements IConsoleUser{
+public abstract class ConsoleUser extends Person implements IConsoleUser{
     protected Console console;
 
     public ConsoleUser(String name, Console console, Integer id){
