@@ -24,7 +24,9 @@ public class CommandControl extends Subscriber implements IConsoleUser {
                 this.reflector.encrypt();
             }
             case CL_CHECKPAYMENT -> {
-
+                if(event.getTask().getClass().equals(ConsoleCorrespondation.M_TRANSACTIONSUCCESS.getClass())){
+                    this.reflector.decrypt();
+                }
             }
         }
     }

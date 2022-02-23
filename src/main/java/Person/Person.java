@@ -1,7 +1,7 @@
 package person;
 
 import console.Subscriber;
-import financial.Wallet;
+import blockchain.Wallet;
 
 public abstract class Person extends Subscriber {
     protected String name;
