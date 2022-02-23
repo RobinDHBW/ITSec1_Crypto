@@ -7,8 +7,8 @@ import console.TextColor;
 public class ConsoleUser extends Person implements IConsoleUser{
     protected Console console;
 
-    public ConsoleUser(String name, Console console){
-        super(name);
+    public ConsoleUser(String name, Console console, Integer id){
+        super(name, id);
         this.console = console;
     }
 

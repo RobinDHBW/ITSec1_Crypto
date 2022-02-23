@@ -1,4 +1,4 @@
-package leverageCom;
+package leverCom;
 
 import configuration.Configuration;
 

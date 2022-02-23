@@ -1,7 +1,6 @@
 package testReflectionComponent;
 
-import configuration.Configuration;
-import leverageCom.RansomwareReflector;
+import leverCom.RansomwareReflector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

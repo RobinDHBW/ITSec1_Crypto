@@ -1,4 +1,4 @@
-import leverageCom.RansomwareFactory;
+import leverCom.RansomwareFactory;
 
 public class Application {
     private final Object fileEaterPort;
