@@ -37,9 +37,9 @@ public class Console implements IConsole {
         List<ConsoleCorrespondation> finEvents = Arrays.asList(ConsoleCorrespondation.CL_EXCHANGE, ConsoleCorrespondation.CL_SHOWBALANCE, ConsoleCorrespondation.CL_SHOWRECIPIENT, ConsoleCorrespondation.CL_PAYBTC, ConsoleCorrespondation.CL_CHECKPAYMENT);
 
         if (ccEvents.contains(input)) {
-            eventBus.post(new AttackEvent(aIndex++));
+            eventBus.post(new AttackEvent(aIndex++, input));
         } else if (finEvents.contains(input)) {
-            this.eventBus.post(new VictimEvent(bIndex++));
+            this.eventBus.post(new VictimEvent(bIndex++, input));
         }
 
         System.out.println(color.getValue() + input.getValue() + ansiReset);

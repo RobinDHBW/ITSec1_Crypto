@@ -23,5 +23,10 @@ public class Attack {
 
     public void start() {
         clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_EXCHANGE);
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWBALANCE);
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWRECIPIENT);
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_PAYBTC);
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_CHECKPAYMENT);
     }
 }

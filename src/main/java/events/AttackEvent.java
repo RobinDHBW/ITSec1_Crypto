@@ -1,9 +1,10 @@
 package events;
 
-public class AttackEvent {
-    private final Integer id;
+import configuration.ConsoleCorrespondation;
 
-    public AttackEvent(Integer id) {
-        this.id = id;
+public class AttackEvent extends  Event{
+
+    public AttackEvent(Integer id, ConsoleCorrespondation task) {
+        super(id, task);
     }
 }

