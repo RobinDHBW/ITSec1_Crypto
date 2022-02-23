@@ -14,10 +14,10 @@ public class ConsoleUser extends Person implements IConsoleUser{
 
     @Override
     public void writeToConsole(ConsoleCorrespondation text, TextColor color) {
-        this.console.writeln(text.getValue(),color);
+        this.console.writeln(text,color);
     }
 
     public void writeToConsole(ConsoleCorrespondation text) {
-        this.console.writeln(text.getValue());
+        this.console.writeln(text);
     }
 }
