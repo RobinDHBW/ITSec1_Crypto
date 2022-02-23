@@ -1,7 +1,9 @@
 package person;
 
+import configuration.ConsoleCorrespondation;
+import console.Console;
 import console.TextColor;
 
 public interface IConsoleUser {
-    void writeToConsole(String text, TextColor color);
+    void writeToConsole(ConsoleCorrespondation text, TextColor color);
 }

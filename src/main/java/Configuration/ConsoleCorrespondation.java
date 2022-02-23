@@ -1,17 +1,22 @@
 package configuration;
 
 public enum ConsoleCorrespondation {
-    instance;
-    public final String clLaunch = "launch http://www.trust-me.mcg/report.jar";
-    public final String clExchange ="exchange 0.02755 BTC";
-    public final String clShowBalance ="show balance";
-    public final String clShowRecipient ="show recipient";
-    public final String clPayBTC ="pay 0.02755 BTC";
-    public final String clCheckPayment ="check payment";
-
-    public final String mEncrypted = "Oops, your files have been encrypted. With a payment of 0.02755 BTC all files will be decrypted";
+    CL_LAUNCH("launch http://www.trust-me.mcg/report.jar"),
+    CL_EXCHANGE("exchange 0.02755 BTC"),
+    CL_SHOWBALANCE("show balance"),
+    CL_SHOWRECIPIENT("show recipient"),
+    CL_PAYBTC("pay 0.02755 BTC"),
+    CL_CHECKPAYMENT("check payment"),
+    M_ENCRYPTED("Oops, your files have been encrypted. With a payment of 0.02755 BTC all files will be decrypted");
 
 
+    private final String value;
 
+    ConsoleCorrespondation(String value){
+        this.value = value;
+    }
 
+    public String getValue() {
+        return value;
+    }
 }

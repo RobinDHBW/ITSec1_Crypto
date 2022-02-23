@@ -1,5 +1,7 @@
 package console;
 
+import configuration.ConsoleCorrespondation;
+
 public class Console implements IConsole {
     private static final String ansiReset = "\u001B[0m";
     private final TextColor defaultColor;
@@ -21,4 +23,12 @@ public class Console implements IConsole {
     public void writeln(String input) {
         writeln(input, defaultColor);
     }
+
+//    public void writeln(ConsoleCorrespondation input, TextColor color){
+//        writeln(input.getValue(), color);
+//    }
+//
+//    public void writeln(ConsoleCorrespondation input){
+//        writeln(input, defaultColor);
+//    }
 }

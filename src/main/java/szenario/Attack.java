@@ -1,5 +1,7 @@
 package szenario;
 
+import configuration.Configuration;
+import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.TextColor;
 import person.Attacker;
@@ -17,6 +19,6 @@ public class Attack {
     }
 
     public void start(){
-
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
     }
 }

@@ -1,5 +1,6 @@
 package person;
 
+import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.TextColor;
 
@@ -12,11 +13,11 @@ public class ConsoleUser extends Person implements IConsoleUser{
     }
 
     @Override
-    public void writeToConsole(String text, TextColor color) {
-        this.console.writeln(text,color);
+    public void writeToConsole(ConsoleCorrespondation text, TextColor color) {
+        this.console.writeln(text.getValue(),color);
     }
 
-    public void writeToConsole(String text) {
-        this.console.writeln(text);
+    public void writeToConsole(ConsoleCorrespondation text) {
+        this.console.writeln(text.getValue());
     }
 }
