@@ -22,7 +22,8 @@ public class BankAccount extends Depository{
 
     @Override
     public Boolean receive(Currency money) {
-        credit+=money.getAmount();
+        super.receive(money);
+        credit += money.getAmount();
         return true;
     }
 

@@ -1,6 +1,7 @@
 package financial;
 
 import currency.Currency;
+import currency.Euro;
 
 import java.util.Arrays;
 
@@ -30,6 +31,19 @@ public abstract class Depository implements ITransfer {
             System.err.println(Arrays.toString(ex.getStackTrace()));
         }
         return false;
+    }
+
+    @Override
+    public Boolean receive(Currency money) {
+        try{
+            if (!money.getClass().equals(this.currency))
+                throw new Exception("Can't transfer " + money.getClass() + " to this Depository");
+            return true;
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+            System.err.println(Arrays.toString(ex.getStackTrace()));
+            return false;
+        }
     }
 
 
