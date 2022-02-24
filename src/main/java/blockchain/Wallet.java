@@ -33,8 +33,8 @@ public class Wallet {
         }
     }
 
-    public float getBalance() {
-        float total = 0;
+    public Double getBalance() {
+        Double total = 0.0;
 
         for (Map.Entry<String, TransactionOutput> item : Configuration.instance.utx0Map.entrySet()) {
             TransactionOutput utx0 = item.getValue();

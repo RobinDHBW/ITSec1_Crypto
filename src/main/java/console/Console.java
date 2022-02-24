@@ -33,7 +33,7 @@ public class Console implements IConsole {
 
     @Override
     public void writeln(ConsoleCorrespondation input, TextColor color) {
-        List<ConsoleCorrespondation> ccEvents = Arrays.asList(ConsoleCorrespondation.CL_LAUNCH, ConsoleCorrespondation.CL_CHECKPAYMENT);
+        List<ConsoleCorrespondation> ccEvents = Arrays.asList(ConsoleCorrespondation.CL_LAUNCH, ConsoleCorrespondation.M_TRANSACTIONSUCCESS);
         List<ConsoleCorrespondation> finEvents = Arrays.asList(ConsoleCorrespondation.CL_EXCHANGE, ConsoleCorrespondation.CL_SHOWBALANCE, ConsoleCorrespondation.CL_SHOWRECIPIENT, ConsoleCorrespondation.CL_PAYBTC, ConsoleCorrespondation.CL_CHECKPAYMENT);
 
         if (ccEvents.contains(input)) {

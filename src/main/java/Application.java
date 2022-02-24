@@ -1,14 +1,13 @@
 import leverCom.RansomwareFactory;
+import org.checkerframework.checker.units.qual.A;
+import szenario.Attack;
 
 public class Application {
-    private final Object fileEaterPort;
+    public static void main(String[] args)
+    {
+         Attack attack = new Attack();
+         attack.start();
 
-    public Application(){
-
-        this.fileEaterPort = RansomwareFactory.build();
-    }
-    public static void main(String[] args) {
-        Application app = new Application();
     }
 
 }

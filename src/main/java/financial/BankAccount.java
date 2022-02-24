@@ -4,19 +4,26 @@ import currency.Currency;
 import currency.Euro;
 
 public class BankAccount extends Depository{
+    protected Double credit;
 
     public BankAccount(Double seedCapital){
-        super(seedCapital, 1.0, Euro.class);
+        super(1.0, Euro.class);
+        this.credit = seedCapital;
     }
 
     @Override
     public Boolean transfer(Currency money, ITransfer receiver) {
-        return super.transfer(money, receiver);
+        if(super.transfer(money, receiver)) {
+            this.credit -= money.getAmount();
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Boolean receive(Currency money) {
-        return super.receive(money);
+        credit+=money.getAmount();
+        return true;
     }
 
     @Override
