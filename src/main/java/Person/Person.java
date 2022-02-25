@@ -11,4 +11,8 @@ public abstract class Person extends Subscriber {
         super(id);
         this.name = name;
     }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
 }

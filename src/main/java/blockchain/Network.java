@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import person.*;
 
 // Blockchain network: Bob, Eve and Sam
 
@@ -19,11 +20,11 @@ public class Network {
 
     public Wallet SatoshiNakamoto;
 
-    private void setup(){
+    private void setup(List miners){
         this.SatoshiNakamoto = new Wallet();
-        miners.add(new Miner("Bob"));
-        miners.add(new Miner("Eve"));
-        miners.add(new Miner("Sam"));
+        //miners.add(new Miner("Bob"));
+        //miners.add(new Miner("Eve"));
+        //miners.add(new Miner("Sam"));
 
         this.genesisBlockTransaction = new Transaction(satoshiNakamoto.getPublicKey(), satoshiNakamoto.getPublicKey(), 1, null);
         this.genesisBlockTransaction.generateSignature(satoshiNakamoto.getPrivateKey());

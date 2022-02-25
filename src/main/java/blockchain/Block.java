@@ -1,9 +1,12 @@
 package blockchain;
 
+import person.Miner;
+
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+
 
 // inspiration: 05/implementation.html
 
