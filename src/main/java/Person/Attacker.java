@@ -2,8 +2,8 @@ package person;
 
 import console.Console;
 
-public class Attacker extends ConsoleUser{
-    public Attacker(String name, Console console, Integer id){
-        super(name,console, id);
+public class Attacker extends Person{
+    public Attacker(String name, Integer id){
+        super(name, id);
     }
 }

@@ -14,7 +14,7 @@ public class Attack {
 
     public Attack() {
         Console console = new Console(TextColor.WHITE, 1);
-        ed = new Attacker("Ed", console, 1);
+        ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
         cc = new CommandControl(1, console);
         console.addSubscriber(ed);
