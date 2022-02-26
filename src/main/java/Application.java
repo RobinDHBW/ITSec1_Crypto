@@ -1,3 +1,4 @@
+import configuration.Configuration;
 import szenario.Attack;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -6,9 +7,18 @@ import java.security.Security;
 public class Application {
     public static void main(String[] args)
     {
-        Security.addProvider(new BouncyCastleProvider());
-         Attack attack = new Attack();
-         attack.start();
+        try {
+            Security.addProvider(new BouncyCastleProvider());
+            ProcessBuilder processBuilder = new ProcessBuilder(Configuration.instance.pathToJarsigner, "-verify", Configuration.instance.pathToJavaArchive+"ITSec1_Crypto_Component.jar");
+            Process process = processBuilder.start();
+            process.waitFor();
+
+            Attack attack = new Attack();
+            attack.start();
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
 
     }
 

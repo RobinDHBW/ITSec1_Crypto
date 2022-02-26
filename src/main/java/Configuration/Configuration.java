@@ -7,4 +7,5 @@ public enum Configuration {
 
     public final String pathToAttack = userDirectory + fileSeparator + "HoneyPot" + fileSeparator;
     public final String pathToJavaArchive = userDirectory + fileSeparator + "ITSec1_Crypto_Component" + fileSeparator + "jar" + fileSeparator;
+    public final String pathToJarsigner = "C:" + fileSeparator + "Program Files" + fileSeparator + "Java" + fileSeparator + "jdk-17.0.2" + fileSeparator + "bin" + fileSeparator + "jarsigner";
 }
