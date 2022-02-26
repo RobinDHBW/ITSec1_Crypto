@@ -21,7 +21,7 @@ public class RansomwareFactory {
             compPort = fileEaterClass.getDeclaredField("port").get(fileEaterInstance);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
         }
 
         return compPort;

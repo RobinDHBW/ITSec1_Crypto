@@ -20,7 +20,7 @@ public class TestComponent {
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
         }catch (Exception ex){
             System.err.println(ex.getMessage());
-            System.err.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
         }
     }
 
@@ -36,7 +36,7 @@ public class TestComponent {
             Files.walk(source).forEach(file -> copy(file, Paths.get(ConfigurationUnitTest.instance.pathToAttack).resolve(source.relativize(file))));
         }catch (Exception ex){
             System.err.println(ex.getMessage());
-            System.err.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
         }
 
 

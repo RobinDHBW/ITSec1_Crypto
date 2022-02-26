@@ -28,7 +28,7 @@ public abstract class Depository implements ITransfer {
             }
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
-            System.err.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
         }
         return false;
     }
@@ -41,7 +41,7 @@ public abstract class Depository implements ITransfer {
             return true;
         }catch (Exception ex){
             System.err.println(ex.getMessage());
-            System.err.println(Arrays.toString(ex.getStackTrace()));
+            ex.printStackTrace();
             return false;
         }
     }
