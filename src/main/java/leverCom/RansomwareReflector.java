@@ -53,5 +53,15 @@ public class RansomwareReflector {
             return null;
         }
     }
+    public Boolean delete() {
+        try {
+            Method deleteMethod = port.getClass().getDeclaredMethod("delete");
+            return (Boolean) deleteMethod.invoke(port);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
 }
