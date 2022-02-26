@@ -6,6 +6,7 @@ import console.TextColor;
 import leverCom.CommandControl;
 import person.Attacker;
 import person.Victim;
+import pressurize.Pressurize;
 
 public class Attack {
     private Attacker ed;// = new Attacker("ed",console);
@@ -14,9 +15,10 @@ public class Attack {
 
     public Attack() {
         Console console = new Console(TextColor.WHITE, 1);
+        Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
-        cc = new CommandControl(1, console);
+        cc = new CommandControl(1, console, pressurize);
         console.addSubscriber(ed);
         console.addSubscriber(cc);
     }
