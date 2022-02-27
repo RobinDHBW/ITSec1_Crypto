@@ -1,17 +1,23 @@
 package blockchain;
 
+import currency.BTC;
+import currency.Currency;
+import financial.Depository;
+import financial.ITransfer;
+
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Wallet {
+public class Wallet extends Depository {
     public HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
     public Wallet() {
+        super(0.000019, BTC.class);
         generateKeyPair();
     }
 
@@ -79,5 +85,30 @@ public class Wallet {
 
     public PublicKey getPublicKey() {
         return this.publicKey;
+    }
+
+    @Override
+    public Boolean transfer(Currency money, ITransfer receiver) {
+        if(super.transfer(money, receiver)) {
+            
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean receive(Currency money) {
+        super.receive(money);
+        return true;
+    }
+
+    @Override
+    public Double calcConversion(Currency money) {
+        return super.calcConversion(money);
+    }
+
+    @Override
+    public Class getCurrency() {
+        return super.getCurrency();
     }
 }
