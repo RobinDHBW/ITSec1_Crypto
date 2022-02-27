@@ -26,11 +26,11 @@ public class Network {
 
     private void setup(List miners){
         this.SatoshiNakamoto = new Wallet();
-        //miners.add(new Miner("Bob"));
-        //miners.add(new Miner("Eve"));
-        //miners.add(new Miner("Sam"));
+        miners.add(new Miner("Bob",1));
+        miners.add(new Miner("Eve",2));
+        miners.add(new Miner("Sam",3));
 
-        this.genesisBlockTransaction = new Transaction(satoshiNakamoto.getPublicKey(), satoshiNakamoto.getPublicKey(), 1, null);
+        this.genesisBlockTransaction = new Transaction(satoshiNakamoto.getPublicKey(), satoshiNakamoto.getPublicKey(), 1.0, null);
         this.genesisBlockTransaction.generateSignature(satoshiNakamoto.getPrivateKey());
         this.genesisBlockTransaction.setId("0");
         this.genesisBlockTransaction.getOutputs().add(new TransactionOutput(this.genesisBlockTransaction.getRecipient(), this.genesisBlockTransaction.getValue(), this.genesisBlockTransaction.getId()));
