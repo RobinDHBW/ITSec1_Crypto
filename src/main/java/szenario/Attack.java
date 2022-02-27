@@ -18,7 +18,7 @@ public class Attack {
         Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
-        cc = new CommandControl(1, console, pressurize);
+        cc = new CommandControl(1, console, pressurize, ed.getWallet());
         console.addSubscriber(ed);
         console.addSubscriber(cc);
     }

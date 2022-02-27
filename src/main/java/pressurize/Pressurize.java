@@ -33,7 +33,7 @@ public class Pressurize implements IConsoleUser {
                 Double toPay = 0.02755 + timerCount * 0.01;
 
                 if(timerCount<4){
-                    ConsoleCorrespondation.M_RANSOMINCREASED.setValue(ConsoleCorrespondation.M_RANSOMINCREASED.getValue() + toPay);
+                    ConsoleCorrespondation.M_RANSOMINCREASED.setValue(ConsoleCorrespondation.M_RANSOMINCREASED.getValue() + toPay + "BTC");
                     writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED);
                 }else {
                     ConsoleCorrespondation.M_RANSOMFINAL.setValue(toPay+ ConsoleCorrespondation.M_RANSOMFINAL.getValue());

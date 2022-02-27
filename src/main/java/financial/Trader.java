@@ -23,21 +23,18 @@ public class Trader extends Subscriber implements IConsoleUser {
     public void receive(AttackEvent event){
         switch (event.getTask()){
             case CL_EXCHANGE -> {
-                this.cl.exchangeEuroToBTC(new Euro(0.02755)); //TODO parse amount from String (Enum value)
+                this.cl.exchangeEuroToBTC(new Euro(0.02755)); //TODO parse amount from String (Enum value) - nicht nötig in diesem Szenario
             }
             case CL_SHOWBALANCE -> {
                 ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue()+this.cl.getWallet().getBalance());
                 this.writeToConsole(ConsoleCorrespondation.M_WALLETBALANCE, TextColor.GREEN);
             }
-            case CL_SHOWRECIPIENT -> {
-                ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue()); //TODO Get Recipient publicKey
-                this.writeToConsole(ConsoleCorrespondation.M_SHOWRECIPIENT, TextColor.GREEN);
-            }
+
             case CL_PAYBTC -> {
                 this.cl.getWallet().sendFunds(null, 0.02755); //TODO get Recipient
             }
             case CL_CHECKPAYMENT -> {
-                
+
             }
 
         }
