@@ -5,8 +5,6 @@ import java.security.*;
 import java.util.ArrayList;
 import java.util.Base64;
 
-// inspiration: 01/implementation.html and 05/implementation.html
-
 public class Utility {
     public static String sha256(String input){
         try {

@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-// inspiration: 05/implementation.html
-
 public class Wallet {
     public HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     private PrivateKey privateKey;

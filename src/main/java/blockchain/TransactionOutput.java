@@ -2,8 +2,6 @@ package blockchain;
 
 import java.security.PublicKey;
 
-// inspiration: 05/implementation.html
-
 public class TransactionOutput {
     private final String id;
     private final PublicKey recipient;

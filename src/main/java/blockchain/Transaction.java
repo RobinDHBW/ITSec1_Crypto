@@ -4,8 +4,6 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-// inspiration: 05/implementation.html
-
 public class Transaction {
     private final PublicKey sender;
     private final PublicKey recipient;

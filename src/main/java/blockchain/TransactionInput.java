@@ -1,7 +1,5 @@
 package blockchain;
 
-// inspiration: 05/implementation.html
-
 public class TransactionInput {
     private final String id;
     private TransactionOutput utx0;

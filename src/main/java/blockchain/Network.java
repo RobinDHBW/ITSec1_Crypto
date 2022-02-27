@@ -1,12 +1,16 @@
 package blockchain;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import person.*;
 
-// Blockchain network: Bob, Eve and Sam
+import com.google.gson.GsonBuilder;
+import person.Miner;
 
 public class Network {
     private List<Miner> miners = new ArrayList<>();
@@ -48,8 +52,15 @@ public class Network {
         this.network.add(newBlock);
         this.previousBlock = newBlock;
 
-        // Logging the blockchain in JSON format
-        //
+        try {
+            File file = Path.of("blockchain.json").toAbsolutePath().toFile();
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file);
+            new GsonBuilder().setPrettyPrinting().create().toJson(this, fileWriter);
+            fileWriter.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private static Network instance;
