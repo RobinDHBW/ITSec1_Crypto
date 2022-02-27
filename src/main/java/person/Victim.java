@@ -25,4 +25,8 @@ public class Victim extends Person implements IConsoleUser {
     public void exchangeEuroToBTC(Euro amount){
         this.bankAccount.transfer(amount, this.wallet);
     }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
 }
