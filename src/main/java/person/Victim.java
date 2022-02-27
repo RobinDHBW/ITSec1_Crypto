@@ -2,6 +2,7 @@ package person;
 
 import console.Console;
 import console.TextColor;
+import currency.Euro;
 import financial.BankAccount;
 
 public class Victim extends Person implements IConsoleUser {
@@ -19,5 +20,9 @@ public class Victim extends Person implements IConsoleUser {
 
     public void writeToConsole(configuration.ConsoleCorrespondation text) {
         this.console.writeln(text);
+    }
+
+    public void exchangeEuroToBTC(Euro amount){
+        this.bankAccount.transfer(amount, this.wallet);
     }
 }
