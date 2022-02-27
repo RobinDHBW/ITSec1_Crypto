@@ -1,12 +1,9 @@
 package pressurize;
 
-import com.google.common.eventbus.Subscribe;
 import configuration.Configuration;
 import configuration.ConsoleCorrespondation;
 import console.Console;
-import console.Subscriber;
 import console.TextColor;
-import events.AttackEvent;
 import leverCom.RansomwareReflector;
 import person.IConsoleUser;
 

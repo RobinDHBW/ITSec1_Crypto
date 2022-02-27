@@ -4,11 +4,15 @@ import currency.Currency;
 import currency.Euro;
 
 public class BankAccount extends Depository{
-    protected Double credit;
+    private Double credit;
 
     public BankAccount(Double seedCapital){
         super(1.0, Euro.class);
         this.credit = seedCapital;
+    }
+
+    public Double getCredit() {
+        return credit;
     }
 
     @Override

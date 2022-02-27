@@ -5,9 +5,9 @@ import java.security.PublicKey;
 public class TransactionOutput {
     private final String id;
     private final PublicKey recipient;
-    private final float value;
+    private final Double value;
 
-    public TransactionOutput(PublicKey recipient, float value, String parentTransactionId) {
+    public TransactionOutput(PublicKey recipient, Double value, String parentTransactionId) {
         this.recipient = recipient;
         this.value = value;
         id = Utility.sha256(Utility.getStringFromKey(recipient) + value + parentTransactionId);
@@ -25,7 +25,7 @@ public class TransactionOutput {
         return recipient;
     }
 
-    public float getValue() {
+    public Double getValue() {
         return value;
     }
 }

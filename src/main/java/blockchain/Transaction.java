@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class Transaction {
     private final PublicKey sender;
     private final PublicKey recipient;
-    private final float value;
+    private final Double value;
     private final ArrayList<TransactionOutput> outputs = new ArrayList<>();
     private final ArrayList<TransactionInput> inputs;
     private String id;
     private byte[] signature;
 
-    public Transaction(PublicKey from, PublicKey to, float value, ArrayList<TransactionInput> inputs) {
+    public Transaction(PublicKey from, PublicKey to, Double value, ArrayList<TransactionInput> inputs) {
         this.sender = from;
         this.recipient = to;
         this.value = value;
@@ -52,7 +52,7 @@ public class Transaction {
             return false;
         }
 
-        float leftOver = getInputsValue() - value;
+        Double leftOver = getInputsValue() - value;
         id = calculateHash();
         outputs.add(new TransactionOutput(recipient, value, id));
         outputs.add(new TransactionOutput(sender, leftOver, id));
@@ -110,7 +110,7 @@ public class Transaction {
         return recipient;
     }
 
-    public float getValue() {
+    public Double getValue() {
         return value;
     }
 

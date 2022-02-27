@@ -1,9 +1,6 @@
 package financial;
 
 import currency.Currency;
-import currency.Euro;
-
-import java.util.Arrays;
 
 public abstract class Depository implements ITransfer {
     protected final Double moneyFactor;
