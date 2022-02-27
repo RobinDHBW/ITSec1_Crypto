@@ -3,6 +3,7 @@ package szenario;
 import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.TextColor;
+import financial.Trader;
 import leverCom.CommandControl;
 import person.Attacker;
 import person.Victim;
@@ -12,6 +13,7 @@ public class Attack {
     private Attacker ed;// = new Attacker("ed",console);
     private Victim clueLess;
     private CommandControl cc;
+    private Trader trader;
 
     public Attack() {
         Console console = new Console(TextColor.WHITE, 1);
@@ -19,8 +21,10 @@ public class Attack {
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
         cc = new CommandControl(1, console, pressurize, ed.getWallet());
+        trader = new Trader(1, console, clueLess);
         console.addSubscriber(ed);
         console.addSubscriber(cc);
+        console.addSubscriber(trader);
     }
 
     public void start() {

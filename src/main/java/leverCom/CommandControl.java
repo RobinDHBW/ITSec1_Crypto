@@ -40,7 +40,7 @@ public class CommandControl extends Subscriber implements IConsoleUser {
                 this.reflector.encrypt();
                 this.reflector.rename(".mcg", true);
                 this.writeToConsole(ConsoleCorrespondation.M_ENCRYPTED, TextColor.RED);
-                pressurize.invokeTimer();
+                //pressurize.invokeTimer(); //TODO start Timer
             }
             case M_TRANSACTIONSUCCESS -> {
                 //if(event.getTask() == ConsoleCorrespondation.M_TRANSACTIONSUCCESS){

@@ -2,6 +2,8 @@ package financial;
 
 import currency.Currency;
 
+import java.lang.reflect.Constructor;
+
 public abstract class Depository implements ITransfer {
     protected final Double moneyFactor;
     protected Class currency;
@@ -19,7 +21,8 @@ public abstract class Depository implements ITransfer {
     @Override
     public Boolean transfer(Currency money, ITransfer receiver) {
         try {
-            Currency target = (Currency) (receiver.getCurrency()).getDeclaredConstructor().newInstance(receiver.calcConversion(money));
+            Constructor co = receiver.getCurrency().getConstructor(Double.class);
+            Currency target = (Currency)co.newInstance(receiver.calcConversion(money));
             if (receiver.receive(target)) {
                 return true;
             }

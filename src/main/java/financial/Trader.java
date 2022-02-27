@@ -9,6 +9,7 @@ import console.TextColor;
 import currency.BTC;
 import currency.Euro;
 import events.AttackEvent;
+import events.VictimEvent;
 import person.IConsoleUser;
 import person.Victim;
 
@@ -20,7 +21,6 @@ import java.util.Base64;
 public class Trader extends Subscriber implements IConsoleUser {
     Console console;
     Victim cl;
-    //Network network;
     PublicKey recipient;
     BTC toPay = new BTC(0.02755);
 
@@ -42,7 +42,7 @@ public class Trader extends Subscriber implements IConsoleUser {
     }
 
     @Subscribe
-    public void receive(AttackEvent event) {
+    public void receive(VictimEvent event) {
         switch (event.getTask()) {
             case CL_EXCHANGE -> {
                 this.cl.exchangeEuroToBTC(new Euro(cl.getBankAccount().calcConversion(toPay)));

@@ -90,7 +90,7 @@ public class Network {
 
     public Miner requestBTCBuying(BTC amount){
         for(Miner m : miners){
-            if(m.getWallet().getBalance() > amount.getAmount()) return m;
+            if(m.getWallet().getBalance() >= amount.getAmount()) return m;
         }
         return null;
     }
