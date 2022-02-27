@@ -1,9 +1,9 @@
-package blockchain;
+package financial;
 
+import blockchain.*;
+import configuration.*;
 import currency.BTC;
 import currency.Currency;
-import financial.Depository;
-import financial.ITransfer;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;

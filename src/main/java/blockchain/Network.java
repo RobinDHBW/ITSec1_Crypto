@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.google.gson.GsonBuilder;
+import configuration.Configuration;
 import currency.BTC;
+import financial.Wallet;
 import person.Miner;
 
 public class Network {
