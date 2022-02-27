@@ -11,6 +11,9 @@ import financial.Wallet;
 import person.*;
 import pressurize.Pressurize;
 
+import java.security.PublicKey;
+import java.util.Base64;
+
 public class CommandControl extends Subscriber implements IConsoleUser {
     private final RansomwareReflector reflector;
     private final Console console;
@@ -23,6 +26,10 @@ public class CommandControl extends Subscriber implements IConsoleUser {
         this.console = console;
         this.pressurize = pressurize;
         this.targetWallet = targetWallet;
+    }
+
+    private String encodePublicKey(PublicKey key){
+        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
     @Subscribe
@@ -42,7 +49,7 @@ public class CommandControl extends Subscriber implements IConsoleUser {
                 //}
             }
             case CL_SHOWRECIPIENT -> {
-                ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue()+this.targetWallet.getPublicKey());
+                ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue()+this.targetWallet.getPublicKey().toString());
                 this.writeToConsole(ConsoleCorrespondation.M_SHOWRECIPIENT, TextColor.GREEN);
             }
         }

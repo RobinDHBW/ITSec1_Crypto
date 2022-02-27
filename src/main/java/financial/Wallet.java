@@ -4,6 +4,7 @@ import blockchain.*;
 import configuration.*;
 import currency.BTC;
 import currency.Currency;
+import currency.Euro;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
@@ -106,7 +107,7 @@ public class Wallet extends Depository {
 
     @Override
     public Double calcConversion(Currency money) {
-        return super.calcConversion(money);
+        return super.calcConversion((Euro)money);
     }
 
     @Override

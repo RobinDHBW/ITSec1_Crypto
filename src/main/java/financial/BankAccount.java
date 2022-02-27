@@ -1,5 +1,6 @@
 package financial;
 
+import currency.BTC;
 import currency.Currency;
 import currency.Euro;
 
@@ -7,7 +8,7 @@ public class BankAccount extends Depository{
     private Double credit;
 
     public BankAccount(Double seedCapital){
-        super(1.0, Euro.class);
+        super(1/0.000019, Euro.class);
         this.credit = seedCapital;
     }
 
@@ -33,7 +34,7 @@ public class BankAccount extends Depository{
 
     @Override
     public Double calcConversion(Currency money) {
-        return super.calcConversion(money);
+        return super.calcConversion((BTC)money);
     }
 
     @Override
