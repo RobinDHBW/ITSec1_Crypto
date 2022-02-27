@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.google.gson.GsonBuilder;
+import currency.BTC;
 import person.Miner;
 
 public class Network {
@@ -79,5 +80,12 @@ public class Network {
 
     public HashMap<String, TransactionOutput> getUtx0Map() {
         return this.utx0Map;
+    }
+
+    public Miner requestBTCBuying(BTC amount){
+        for(Miner m : miners){
+            if(m.getWallet().getBalance() > amount.getAmount()) return m;
+        }
+        return null;
     }
 }
