@@ -20,15 +20,11 @@ import java.util.Base64;
 public class Trader extends Subscriber implements IConsoleUser {
     Console console;
     Victim cl;
-<<<<<<< HEAD
-    Network network;
-    public Trader(Integer id, Console console, Victim cl){
-=======
+    //Network network;
     PublicKey recipient;
     BTC toPay = new BTC(0.02755);
 
     public Trader(Integer id, Console console, Victim cl) {
->>>>>>> 62a210deb59be85bff4c06fe6f841ab5ba9e9814
         super(id);
         this.console = console;
         this.cl = cl;
@@ -62,16 +58,18 @@ public class Trader extends Subscriber implements IConsoleUser {
                 this.cl.getWallet().sendFunds(this.recipient, toPay.getAmount());
             }
             case CL_CHECKPAYMENT -> {
-<<<<<<< HEAD
-                this.network.check();
-=======
-
+                Network.getInstance().check();
+                if (Network.getInstance().isPaid()) {
+                    this.writeToConsole(ConsoleCorrespondation.M_TRANSACTIONSUCCESS, TextColor.GREEN);
+                } else {
+                    this.writeToConsole(ConsoleCorrespondation.M_TRANSACTIONFAIL, TextColor.RED);
+                }
             }
             case M_RANSOMINCREASED -> {
                 String toProcess = event.getTask().getValue();
                 String doubleString = toProcess.substring(40, toProcess.length() - 4);
                 toPay = new BTC(Double.parseDouble(doubleString));
->>>>>>> 62a210deb59be85bff4c06fe6f841ab5ba9e9814
+
             }
         }
     }
