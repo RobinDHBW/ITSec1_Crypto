@@ -21,17 +21,18 @@ public class Trader extends Subscriber implements IConsoleUser {
     Victim cl;
     PublicKey recipient;
     BTC toPay = new BTC(0.02755);
-    public Trader(Integer id, Console console, Victim cl){
+
+    public Trader(Integer id, Console console, Victim cl) {
         super(id);
         this.console = console;
         this.cl = cl;
     }
 
-    private PublicKey decodePublicKey(String key){
+    private PublicKey decodePublicKey(String key) {
         try {
             KeyFactory factory = KeyFactory.getInstance("ECDSA", "BC");
             return factory.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(key)));
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
             return null;
@@ -39,13 +40,13 @@ public class Trader extends Subscriber implements IConsoleUser {
     }
 
     @Subscribe
-    public void receive(AttackEvent event){
-        switch (event.getTask()){
+    public void receive(AttackEvent event) {
+        switch (event.getTask()) {
             case CL_EXCHANGE -> {
                 this.cl.exchangeEuroToBTC(new Euro(cl.getBankAccount().calcConversion(toPay)));
             }
             case CL_SHOWBALANCE -> {
-                ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue()+this.cl.getWallet().getBalance());
+                ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue() + this.cl.getWallet().getBalance());
                 this.writeToConsole(ConsoleCorrespondation.M_WALLETBALANCE, TextColor.GREEN);
             }
             case M_SHOWRECIPIENT -> {
@@ -56,6 +57,11 @@ public class Trader extends Subscriber implements IConsoleUser {
             }
             case CL_CHECKPAYMENT -> {
 
+            }
+            case M_RANSOMINCREASED -> {
+                String toProcess = event.getTask().getValue();
+                String doubleString = toProcess.substring(40, toProcess.length() - 4);
+                toPay = new BTC(Double.parseDouble(doubleString));
             }
 
         }

