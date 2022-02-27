@@ -23,6 +23,10 @@ public class Network {
     private Block previousBlock;
     private Wallet satoshiNakamoto;
     private int sequence;
+    boolean encrypted = false;
+    boolean paid = false;
+    Wallet wallet;
+    Double amount = 0.02755;
 
 
     public Wallet SatoshiNakamoto;
@@ -89,5 +93,33 @@ public class Network {
             if(m.getWallet().getBalance() > amount.getAmount()) return m;
         }
         return null;
+    }
+
+    public void check(){
+        if (!this.encrypted) return;
+        if (this.wallet.getBalance() < this.amount) return;
+        if (Network.getInstance().isPaid()) {
+            this.paid = true;
+        }
+    }
+
+    public boolean isPaid(){
+        Block block;
+        String hashTarget = Utility.getDifficultyString(Configuration.instance.difficulty);
+        HashMap<String, TransactionOutput> tempUtx0 = new HashMap<>();
+        tempUtx0.put(this.genesisBlockTransaction.getOutputs().get(0).getID(), this.genesisBlockTransaction.getOutputs().get(0));
+
+        for (int i = 1; i < this.network.size(); i++){
+            block = this.network.get(i);
+
+            if (!block.getHash().equals(block.calculateHash())){
+                return false;
+            }
+            if(!block.getHash().substring(0, Configuration.instance.difficulty).equals(hashTarget)){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

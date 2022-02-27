@@ -1,5 +1,6 @@
 package financial;
 
+import blockchain.Network;
 import com.google.common.eventbus.Subscribe;
 import configuration.ConsoleCorrespondation;
 import console.Console;
@@ -13,6 +14,7 @@ import person.Victim;
 public class Trader extends Subscriber implements IConsoleUser {
     Console console;
     Victim cl;
+    Network network;
     public Trader(Integer id, Console console, Victim cl){
         super(id);
         this.console = console;
@@ -37,9 +39,8 @@ public class Trader extends Subscriber implements IConsoleUser {
                 this.cl.getWallet().sendFunds(null, 0.02755); //TODO get Recipient
             }
             case CL_CHECKPAYMENT -> {
-                
+                this.network.check();
             }
-
         }
     }
 
