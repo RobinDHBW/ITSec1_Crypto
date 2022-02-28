@@ -16,6 +16,7 @@ import financial.Wallet;
 import person.Miner;
 
 public class Network {
+    private static Network instance;
     private List<Miner> miners = new ArrayList<>();
     private HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     private ArrayList<Block> network = new ArrayList<>();
@@ -31,8 +32,8 @@ public class Network {
 
     public Wallet SatoshiNakamoto;
 
-    private void setup(List miners){
-        this.SatoshiNakamoto = new Wallet();
+    private void setup(){
+        this.satoshiNakamoto = new Wallet();
         miners.add(new Miner("Bob",1));
         miners.add(new Miner("Eve",2));
         miners.add(new Miner("Sam",3));
@@ -70,9 +71,12 @@ public class Network {
         }
     }
 
-    private static Network instance;
+
     public static Network getInstance() {
-        if (instance == null) instance = new Network();
+        if (instance == null) {
+            instance = new Network();
+            instance.setup();
+        }
         return instance;
     }
 
