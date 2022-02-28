@@ -88,9 +88,12 @@ public class Network {
         return this.utx0Map;
     }
 
-    public Miner requestBTCBuying(BTC amount){
+    public Wallet requestBTCBuying(BTC amount){
         for(Miner m : miners){
-            if(m.getWallet().getBalance() >= amount.getAmount()) return m;
+            if(m.getWallet().getBalance() >= amount.getAmount()) return m.getWallet();
+        }
+        if(satoshiNakamoto.getBalance() >= amount.getAmount()) {
+            return this.satoshiNakamoto;
         }
         return null;
     }
