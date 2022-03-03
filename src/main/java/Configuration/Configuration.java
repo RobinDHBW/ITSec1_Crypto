@@ -20,7 +20,7 @@ public enum Configuration {
 
     public Transaction genesisTransaction;
     public HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
-    public Double minimumTransaction = 0.1;
+    public Double minimumTransaction = 0.001;
     public ArrayList<Block> blockchain = new ArrayList<>();
     public Integer transactionSequence = 0;
 }

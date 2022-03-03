@@ -50,7 +50,7 @@ public class Attack {
         eve = new Miner("Eve", 2);
 
         cc = new CommandControl(1, console, pressurize, ed.getWallet());
-        trader = new Trader(1, console, clueLess);
+        trader = new Trader(1, console, clueLess, ed.getWallet().getPublicKey());
         console.addSubscriber(ed);
         console.addSubscriber(cc);
         console.addSubscriber(trader);

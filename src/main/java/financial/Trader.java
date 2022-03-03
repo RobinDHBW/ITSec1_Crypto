@@ -24,10 +24,11 @@ public class Trader extends Subscriber implements IConsoleUser {
     PublicKey recipient;
     BTC toPay = new BTC(0.02755);
 
-    public Trader(Integer id, Console console, Victim cl) {
+    public Trader(Integer id, Console console, Victim cl, PublicKey recipient) {
         super(id);
         this.console = console;
         this.cl = cl;
+        this.recipient = recipient;
     }
 
     private PublicKey decodePublicKey(String key) {

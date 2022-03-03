@@ -21,7 +21,7 @@ public class Network {
     private List<Miner> miners = new ArrayList<>();
     //private HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     private ArrayList<Block> network = new ArrayList<>();
-    private Transaction genesisBlockTransaction;
+    //private Transaction genesisBlockTransaction;
     private Block previousBlock;
     private Wallet satoshiNakamoto = new Wallet();
     private int sequence;
@@ -59,7 +59,6 @@ public class Network {
             instance = new Network();
             //instance.setup();
         }
-        Double val = instance.satoshiNakamoto.getBalance();
         return instance;
     }
 
@@ -97,7 +96,7 @@ public class Network {
         Block block;
         String hashTarget = Utility.getDifficultyString(Configuration.instance.difficulty);
         HashMap<String, TransactionOutput> tempUtx0 = new HashMap<>();
-        tempUtx0.put(this.genesisBlockTransaction.getOutputs().get(0).getID(), this.genesisBlockTransaction.getOutputs().get(0));
+        tempUtx0.put(Configuration.instance.genesisTransaction.getOutputs().get(0).getID(), Configuration.instance.genesisTransaction.getOutputs().get(0));
 
         for (int i = 1; i < this.network.size(); i++){
             block = this.network.get(i);
