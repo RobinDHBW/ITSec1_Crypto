@@ -42,11 +42,11 @@ public class Pressurize implements IConsoleUser {
 
                     if (timerCount < 4) {
                         writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED, TextColor.RED);
-                        writeToConsole(toPay + " BTC", TextColor.RED);
+                        writeToConsole(">>"+toPay + " BTC", TextColor.RED);
 
                     } else {
                         writeToConsole(ConsoleCorrespondation.M_RANSOMFINAL, TextColor.RED);
-                        writeToConsole(toPay + " BTC", TextColor.RED);
+                        writeToConsole(">>"+toPay + " BTC", TextColor.RED);
                     }
                     if (timerCount < 5) restartTimer();
 

@@ -52,7 +52,7 @@ public class Trader extends Subscriber implements IConsoleUser {
                 this.cl.exchangeEuroToBTC(new Euro(cl.getBankAccount().calcConversion(toPay)));
             }
             case CL_SHOWBALANCE -> {
-                ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue() + this.cl.getWallet().getBalance());
+                ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue() + this.cl.getWallet().getBalance() + " BTC");
                 this.writeToConsole(ConsoleCorrespondation.M_WALLETBALANCE, TextColor.GREEN);
             }
             case M_SHOWRECIPIENT -> {

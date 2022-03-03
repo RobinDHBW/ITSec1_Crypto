@@ -8,6 +8,7 @@ import financial.BankAccount;
 public class Victim extends Person implements IConsoleUser {
     private  Console console;
     private BankAccount bankAccount = new BankAccount(5000.0);
+    private Double ransom;
     public Victim(String name, Console console, Integer id){
         super(name, id);
         this.console = console;
@@ -28,5 +29,13 @@ public class Victim extends Person implements IConsoleUser {
 
     public BankAccount getBankAccount() {
         return bankAccount;
+    }
+
+    public Double getRansom() {
+        return ransom;
+    }
+
+    public void setRansom(Double ransom) {
+        this.ransom = ransom;
     }
 }

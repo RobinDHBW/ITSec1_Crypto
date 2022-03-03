@@ -13,7 +13,8 @@ public enum ConsoleCorrespondation {
     M_RANSOMINCREASED(">>Amount to pay increased by 0,01 BTC to: "),
     M_RANSOMFINAL(">>Pay immediately or your files will be irrevocably deleted: "),
     M_WALLETBALANCE(">>Wallet balance: "),
-    M_SHOWRECIPIENT(">>Recipient: ");
+    M_SHOWRECIPIENT(">>Recipient: "),
+    M_CONGRATS(">>Congratulations! Your files have been decrypted - we appreciate your funding.");
 
 
 

@@ -43,12 +43,10 @@ public class CommandControl extends Subscriber implements IConsoleUser {
                 pressurize.invokeTimer(); //TODO start Timer
             }
             case M_TRANSACTIONSUCCESS -> {
-                //if(event.getTask() == ConsoleCorrespondation.M_TRANSACTIONSUCCESS){
+                this.pressurize.cancelTimer();
                 this.reflector.decrypt();
                 this.reflector.rename(".mcg", false);
-                this.pressurize.cancelTimer();
-
-                //}
+                this.writeToConsole(ConsoleCorrespondation.M_CONGRATS, TextColor.GREEN);
             }
             case CL_SHOWRECIPIENT -> {
                 ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue() + this.encodePublicKey(this.targetWallet.getPublicKey()));
