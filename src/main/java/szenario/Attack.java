@@ -17,6 +17,7 @@ import person.Victim;
 import pressurize.Pressurize;
 
 import java.security.PublicKey;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,7 +44,7 @@ public class Attack {
     }
 
     private void payAtRandomMoment(){
-        Integer delay = 5000; //TODO Random delay between 1000 and 360000
+        Integer delay = new Random().nextInt(360000);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
