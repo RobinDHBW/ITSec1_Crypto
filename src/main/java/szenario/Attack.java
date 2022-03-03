@@ -29,7 +29,7 @@ public class Attack {
 
     private void init(){
         Wallet coinbase = Network.getInstance().getSatoshiNakamoto();
-        Configuration.instance.genesisTransaction = new Transaction(coinbase.getPublicKey(), clueLess.getWallet().getPublicKey(), 1.0, null);
+        Configuration.instance.genesisTransaction = new Transaction(coinbase.getPublicKey(), coinbase.getPublicKey(), 1.0, null);
         Configuration.instance.genesisTransaction.generateSignature(coinbase.getPrivateKey());
         Configuration.instance.genesisTransaction.setId("0");
         Configuration.instance.genesisTransaction.getOutputs().add(new TransactionOutput(Configuration.instance.genesisTransaction.getRecipient(),Configuration.instance.genesisTransaction.getValue(), Configuration.instance.genesisTransaction.getId()));
