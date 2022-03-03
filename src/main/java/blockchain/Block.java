@@ -42,23 +42,27 @@ public class Block {
             hash = calculateHash();
         }
 
-        System.out.println("block mined | " + hash);
+       // System.out.println("block mined | " + hash);
     }
 
     public void addTransaction(Transaction transaction) {
-        if (transaction == null) {
-            return;
-        }
-
-        if (!Objects.equals(previousHash, "0")) {
-            if (!transaction.processTransaction()) {
-                System.out.println("transaction failed to process");
+        try{
+            if (transaction == null) {
                 return;
             }
-        }
 
-        transactions.add(transaction);
-        System.out.println("transaction added to block");
+            if (!Objects.equals(previousHash, "0")) {
+                if (!transaction.processTransaction()) {
+                    throw  new Exception("transaction failed to process");
+                }
+            }
+
+            transactions.add(transaction);
+            //System.out.println("transaction added to block");
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 
     public String getHash() {

@@ -2,6 +2,7 @@ package financial;
 
 import blockchain.Network;
 import com.google.common.eventbus.Subscribe;
+import configuration.Configuration;
 import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.Subscriber;
@@ -15,6 +16,8 @@ import person.Victim;
 
 import java.security.KeyFactory;
 import java.security.PublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -33,7 +36,7 @@ public class Trader extends Subscriber implements IConsoleUser {
 
     private PublicKey decodePublicKey(String key) {
         try {
-            KeyFactory factory = KeyFactory.getInstance("ECDSA", "BC");
+            KeyFactory factory = KeyFactory.getInstance("RSA");
             return factory.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(key)));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

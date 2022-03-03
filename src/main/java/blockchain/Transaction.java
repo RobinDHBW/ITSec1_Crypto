@@ -30,47 +30,51 @@ public class Transaction {
 
     public void generateSignature(PrivateKey privateKey) {
         String data = Utility.getStringFromKey(sender) + Utility.getStringFromKey(recipient) + value;
-        signature = Utility.applyECDSASig(privateKey, data);
+        signature = Utility.applyRSASig(privateKey, data);
     }
 
     public boolean verifySignature() {
         String data = Utility.getStringFromKey(sender) + Utility.getStringFromKey(recipient) + value;
-        return !Utility.verifyECDSASig(sender, data, signature);
+        return Utility.verifyRSASig(sender, data, signature);
 
     }
 
-    public boolean processTransaction() {
-        if (verifySignature()) {
-            System.out.println("#transaction signature failed to verify");
-            return false;
-        }
-
-        for (TransactionInput i : inputs) {
-            i.setUtx0(Configuration.instance.utx0Map.get(i.getId()));
-        }
-
-        if (getInputsValue() < Configuration.instance.minimumTransaction) {
-            System.out.println("#transaction input to small | " + getInputsValue());
-            return false;
-        }
-
-        Double leftOver = getInputsValue() - value;
-        id = calculateHash();
-        outputs.add(new TransactionOutput(recipient, value, id));
-        outputs.add(new TransactionOutput(sender, leftOver, id));
-
-        for (TransactionOutput o : outputs) {
-            Configuration.instance.utx0Map.put(o.getID(), o);
-        }
-
-        for (TransactionInput i : inputs) {
-            if (i.getUTX0() == null) {
-                continue;
+    public Boolean processTransaction() {
+        try{
+            if (!verifySignature()) {
+                throw new Exception("#transaction signature failed to verify");
             }
-            Configuration.instance.utx0Map.remove(i.getUTX0().getID());
-        }
 
-        return true;
+            for (TransactionInput i : inputs) {
+                i.setUtx0(Configuration.instance.utx0Map.get(i.getId()));
+            }
+
+            if (getInputsValue() < Configuration.instance.minimumTransaction) {
+                throw new Exception("#transaction input to small | " + getInputsValue());
+            }
+
+            Double leftOver = getInputsValue() - value;
+            id = calculateHash();
+            outputs.add(new TransactionOutput(recipient, value, id));
+            outputs.add(new TransactionOutput(sender, leftOver, id));
+
+            for (TransactionOutput o : outputs) {
+                Configuration.instance.utx0Map.put(o.getID(), o);
+            }
+
+            for (TransactionInput i : inputs) {
+                if (i.getUTX0() == null) {
+                    continue;
+                }
+                Configuration.instance.utx0Map.remove(i.getUTX0().getID());
+            }
+
+            return true;
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public float getInputsValue() {

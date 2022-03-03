@@ -8,6 +8,7 @@ import currency.Euro;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
+import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +25,8 @@ public class Wallet extends Depository {
 
     public void generateKeyPair() {
         try {
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
-            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
-
-            keyGen.initialize(ecSpec, random);
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048);
             KeyPair keyPair = keyGen.generateKeyPair();
 
             privateKey = keyPair.getPrivate();
