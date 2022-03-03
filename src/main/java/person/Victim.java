@@ -2,13 +2,14 @@ package person;
 
 import console.Console;
 import console.TextColor;
+import currency.BTC;
 import currency.Euro;
 import financial.BankAccount;
 
 public class Victim extends Person implements IConsoleUser {
     private  Console console;
     private BankAccount bankAccount = new BankAccount(5000.0);
-    private Double ransom;
+    private BTC ransom;
     public Victim(String name, Console console, Integer id){
         super(name, id);
         this.console = console;
@@ -31,11 +32,12 @@ public class Victim extends Person implements IConsoleUser {
         return bankAccount;
     }
 
-    public Double getRansom() {
+    public BTC getRansom() {
         return ransom;
     }
 
-    public void setRansom(Double ransom) {
+    public void setRansom(BTC ransom) {
         this.ransom = ransom;
     }
+
 }

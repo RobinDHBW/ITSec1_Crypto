@@ -10,6 +10,7 @@ import events.AttackEvent;
 import financial.Wallet;
 import person.IConsoleUser;
 import pressurize.Pressurize;
+import szenario.Attack;
 
 import java.security.PublicKey;
 import java.util.Base64;
@@ -44,6 +45,7 @@ public class CommandControl extends Subscriber implements IConsoleUser {
             }
             case M_TRANSACTIONSUCCESS -> {
                 this.pressurize.cancelTimer();
+                Attack.getInstance().hePaid();
                 this.reflector.decrypt();
                 this.reflector.rename(".mcg", false);
                 this.writeToConsole(ConsoleCorrespondation.M_CONGRATS, TextColor.GREEN);

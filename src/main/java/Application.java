@@ -21,7 +21,7 @@ public class Application {
             process.waitFor();
 
 
-            Attack attack = new Attack();
+            Attack attack = Attack.getInstance();
             attack.start();
         }catch (Exception ex){
             System.err.println(ex.getMessage());

