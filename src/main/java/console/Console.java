@@ -27,8 +27,8 @@ public class Console implements IConsole {
     }
 
     @Override
-    public String readln() {
-        return null;
+    public void writeln(String input, TextColor color) {
+        System.out.println(color.getValue() + input + ansiReset);
     }
 
     @Override

@@ -17,6 +17,8 @@ import person.Victim;
 import pressurize.Pressurize;
 
 import java.security.PublicKey;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Attack {
     private Attacker ed;// = new Attacker("ed",console);
@@ -38,6 +40,19 @@ public class Attack {
         genesisBlock.addTransaction(Configuration.instance.genesisTransaction);
         Network.getInstance().addBlock(genesisBlock);
 
+    }
+
+    private void payAtRandomMoment(){
+        Integer delay = 5000; //TODO Random delay between 1000 and 360000
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_PAYBTC);
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_CHECKPAYMENT);
+            }
+        };
+        timer.schedule(task, delay);
     }
 
     public Attack() {
@@ -62,7 +77,6 @@ public class Attack {
         clueLess.writeToConsole(ConsoleCorrespondation.CL_EXCHANGE);
         clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWBALANCE);
         clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWRECIPIENT);
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_PAYBTC);
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_CHECKPAYMENT);
+        payAtRandomMoment();
     }
 }
