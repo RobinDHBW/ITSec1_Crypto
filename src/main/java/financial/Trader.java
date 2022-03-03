@@ -55,7 +55,7 @@ public class Trader extends Subscriber implements IConsoleUser {
                 this.recipient = decodePublicKey(event.getTask().getValue().substring(11));
             }
             case CL_PAYBTC -> {
-                this.cl.getWallet().sendFunds(this.recipient, toPay.getAmount());
+                Network.getInstance().addTransaction(this.cl.getWallet().sendFunds(this.recipient, toPay.getAmount()), this.recipient);
             }
             case CL_CHECKPAYMENT -> {
                 Network.getInstance().check();

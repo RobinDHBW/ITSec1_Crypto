@@ -61,7 +61,7 @@ public class Network {
         this.network.add(newBlock);
         this.previousBlock = newBlock;
 
-        try {
+        /*try {
             File file = Path.of("blockchain.json").toAbsolutePath().toFile();
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(file);
@@ -69,7 +69,7 @@ public class Network {
             fileWriter.close();
         } catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
     }
 
 
@@ -78,6 +78,7 @@ public class Network {
             instance = new Network();
             instance.setup();
         }
+        Double val = instance.satoshiNakamoto.getBalance();
         return instance;
     }
 

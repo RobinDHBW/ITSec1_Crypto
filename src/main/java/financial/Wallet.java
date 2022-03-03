@@ -60,7 +60,7 @@ public class Wallet extends Depository {
 
         ArrayList<TransactionInput> inputs = new ArrayList<>();
 
-        float total = 0;
+        Double total = 0.0;
         for (Map.Entry<String, TransactionOutput> item : utx0Map.entrySet()) {
             TransactionOutput utx0 = item.getValue();
             total += utx0.getValue();
@@ -92,7 +92,7 @@ public class Wallet extends Depository {
     public Boolean transfer(Currency money, ITransfer receiver) {
         if(super.transfer(money, receiver)) {
             PublicKey recipient = Network.getInstance().requestBTCBuying(new BTC(0.0)).getPublicKey();
-            this.sendFunds(recipient, money.getAmount());
+            Network.getInstance().addTransaction(this.sendFunds(recipient, money.getAmount()), recipient);
             return true;
         }
         return false;
@@ -101,7 +101,7 @@ public class Wallet extends Depository {
     @Override
     public Boolean receive(Currency money) {
         super.receive(money);
-        Network.getInstance().requestBTCBuying(new BTC(0.0)).sendFunds(this.publicKey, money.getAmount());
+        Network.getInstance().addTransaction(Network.getInstance().requestBTCBuying(new BTC(0.0)).sendFunds(this.publicKey, money.getAmount()), this.publicKey);
         return true;
     }
 
