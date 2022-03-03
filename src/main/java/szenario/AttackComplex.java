@@ -21,8 +21,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Attack {
-    private static Attack instance;
+public class AttackComplex {
+    private static AttackComplex instance;
     private Attacker ed;
     private Victim clueLess;
     private CommandControl cc;
@@ -30,8 +30,9 @@ public class Attack {
     private Miner sam;
     private Miner bob;
     private Miner eve;
+    private Timer timer;
 
-    private Attack() {
+    private AttackComplex() {
         Console console = new Console(TextColor.WHITE, 1);
         Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
@@ -48,8 +49,8 @@ public class Attack {
         init();
     }
 
-    public static Attack getInstance() {
-        if (Objects.isNull(instance)) instance = new Attack();
+    public static AttackComplex getInstance() {
+        if (Objects.isNull(instance)) instance = new AttackComplex();
         return instance;
     }
 
@@ -66,15 +67,33 @@ public class Attack {
 
     }
 
-        public void start() {
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
-        ConsoleCorrespondation.CL_EXCHANGE.setValue("exchange " + clueLess.getRansom().getAmount() + " BTC");
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_EXCHANGE);
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWBALANCE);
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWRECIPIENT);
-        ConsoleCorrespondation.CL_PAYBTC.setValue("pay " + clueLess.getRansom().getAmount() + "BTC");
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_PAYBTC);
-        clueLess.writeToConsole(ConsoleCorrespondation.CL_CHECKPAYMENT);
+    private void payAtRandomMoment() {
+        Integer delay = new Random().nextInt(360000);
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                ConsoleCorrespondation.CL_EXCHANGE.setValue("exchange " + clueLess.getRansom().getAmount() + " BTC");
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_EXCHANGE);
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWBALANCE);
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_SHOWRECIPIENT);
+                ConsoleCorrespondation.CL_PAYBTC.setValue("pay " + clueLess.getRansom().getAmount() + "BTC");
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_PAYBTC);
+                clueLess.writeToConsole(ConsoleCorrespondation.CL_CHECKPAYMENT);
+            }
+        };
+        timer.schedule(task, delay);
+    }
 
+    public void start() {
+        clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
+        payAtRandomMoment();
+    }
+
+    public void hePaid() {
+        if(Objects.nonNull(timer)) {
+            timer.cancel();
+            timer.purge();
+        }
     }
 }
