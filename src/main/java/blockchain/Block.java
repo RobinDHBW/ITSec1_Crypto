@@ -16,23 +16,24 @@ public class Block {
     private final ArrayList<Transaction> transactions = new ArrayList<>();
     private String merkleRoot;
     private String hash;
-    private int nonce;
+    private int nonce =0;
 
-    private PublicKey miner;
+    private PublicKey pKey;
     private final double reward = 0.025;
 
-    public Block(String previousHash){
+    public Block(String previousHash, PublicKey pKey){
         this.previousHash = previousHash;
+        this.pKey = pKey;
         this.timeStamp = new Date().getTime();
         this.hash = calculateHash();
     }
 
     public String calculateHash(){
-        return Utility.sha256(previousHash + timeStamp + nonce + merkleRoot + Utility.getStringFromKey(miner) + reward);
+        return Utility.sha256(previousHash + timeStamp + nonce + merkleRoot + Utility.getStringFromKey(this.pKey) + reward);
     }
 
-    public void mine(int difficulty, Miner miner){
-        this.miner = miner.getWallet().getPublicKey();
+    public void mine(int difficulty){
+        //this.pKey = miner.getWallet().getPublicKey();
         merkleRoot = Utility.getMerkleRoot(transactions);
         String target = Utility.getDifficultyString(difficulty);
 

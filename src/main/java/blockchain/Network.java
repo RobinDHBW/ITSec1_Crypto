@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,20 +44,20 @@ public class Network {
         this.genesisBlockTransaction.setId("0");
         this.genesisBlockTransaction.getOutputs().add(new TransactionOutput(this.genesisBlockTransaction.getRecipient(), this.genesisBlockTransaction.getValue(), this.genesisBlockTransaction.getId()));
         this.utx0Map.put(this.genesisBlockTransaction.getOutputs().get(0).getID(), this.genesisBlockTransaction.getOutputs().get(0));
-        Block genesisBlock = new Block("0");
+        Block genesisBlock = new Block("0", satoshiNakamoto.getPublicKey());
         genesisBlock.addTransaction(this.genesisBlockTransaction);
         addBlock(genesisBlock);
     }
 
-    public void addTransaction(Transaction transaction) {
-        Block block = new Block(this.previousBlock.getHash());
+    public void addTransaction(Transaction transaction, PublicKey publicKey) {
+        Block block = new Block(this.previousBlock.getHash(), publicKey);
         block.addTransaction(transaction);
         this.addBlock(block);
     }
 
     private void addBlock(Block newBlock) {
-        Miner m = miners.get(ThreadLocalRandom.current().nextInt(miners.size()) % miners.size());
-        newBlock.mine(Configuration.instance.difficulty, m);
+        //Miner m = miners.get(ThreadLocalRandom.current().nextInt(miners.size()) % miners.size());
+        newBlock.mine(Configuration.instance.difficulty);
         this.network.add(newBlock);
         this.previousBlock = newBlock;
 
