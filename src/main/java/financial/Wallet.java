@@ -91,7 +91,7 @@ public class Wallet extends Depository {
     @Override
     public Boolean transfer(Currency money, ITransfer receiver) {
         if(super.transfer(money, receiver)) {
-            PublicKey recipient = Network.getInstance().requestBTCBuying(new BTC(0.0)).getPublicKey();
+            PublicKey recipient = Network.getInstance().requestBTCBuying(new BTC(money.getAmount())).getPublicKey();
             Network.getInstance().addTransaction(this.sendFunds(recipient, money.getAmount()), recipient);
             return true;
         }
@@ -101,7 +101,7 @@ public class Wallet extends Depository {
     @Override
     public Boolean receive(Currency money) {
         super.receive(money);
-        Network.getInstance().addTransaction(Network.getInstance().requestBTCBuying(new BTC(0.0)).sendFunds(this.publicKey, money.getAmount()), this.publicKey);
+        Network.getInstance().addTransaction(Network.getInstance().requestBTCBuying(new BTC(money.getAmount())).sendFunds(this.publicKey, money.getAmount()), this.publicKey);
         return true;
     }
 
