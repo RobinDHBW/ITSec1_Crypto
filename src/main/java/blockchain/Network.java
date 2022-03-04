@@ -13,7 +13,7 @@ import person.Miner;
 public class Network {
     private static Network instance;
     private List<Miner> miners = new ArrayList<>();
-    private ArrayList<Block> network = new ArrayList<>();
+    private ArrayList<Block> blockchain = new ArrayList<>();
     private Block previousBlock;
     private Wallet satoshiNakamoto = new Wallet();
     private int sequence;
@@ -30,7 +30,7 @@ public class Network {
 
     public void addBlock(Block newBlock) {
         newBlock.mine(Configuration.instance.difficulty);
-        this.network.add(newBlock);
+        this.blockchain.add(newBlock);
         this.previousBlock = newBlock;
 
         /*try {
@@ -77,22 +77,27 @@ public class Network {
     public void check(){
         if (!this.encrypted) return;
         if (this.wallet.getBalance() < this.amount) return;
-        if (Network.getInstance().isPaid()) {
+        if (Network.getInstance().checkBlockchainValidity()) {
             this.paid = true;
         }
     }
 
-    public boolean isPaid(){
-        Block block;
+    public boolean checkBlockchainValidity(){
+        Block current;
+        Block previous;
         String hashTarget = Utility.getDifficultyString(Configuration.instance.difficulty);
 
-        for (int i = 1; i < this.network.size(); i++){
-            block = this.network.get(i);
+        for (int i = 1; i < this.blockchain.size(); i++){
+            current = this.blockchain.get(i);
+            previous = this.blockchain.get(i-1);
 
-            if (!block.getHash().equals(block.calculateHash())){
+            if (!current.getHash().equals(current.calculateHash())){
                 return false;
             }
-            if(!block.getHash().substring(0, Configuration.instance.difficulty).equals(hashTarget)){
+            if(!previous.getHash().equals(current.getPreviousHash())){
+                return false;
+            }
+            if(!current.getHash().substring(0, Configuration.instance.difficulty).equals(hashTarget)){
                 return false;
             }
         }
