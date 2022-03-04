@@ -17,7 +17,7 @@ public enum Configuration {
     public final String pathToJarsigner = "C:" + fileSeparator + "Program Files" + fileSeparator + "Java" + fileSeparator + "jdk-17.0.2" + fileSeparator + "bin" + fileSeparator + "jarsigner";
 
     public final Integer minTimer = 270000;
-    public final Integer maxTimer = 360000;
+    public final Integer maxTimer = 330000;
 
     public final Integer difficulty = 5;
     public Transaction genesisTransaction;
