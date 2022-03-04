@@ -49,31 +49,35 @@ public class Wallet extends Depository {
     }
 
     public Transaction sendFunds(PublicKey recipient, Double value) {
-        if (getBalance() < value) {
-            System.out.println("#not enough funds to send transaction - transaction discarded");
+        try{
+            if (getBalance() < value) throw new  Exception("#not enough funds to send transaction - transaction discarded");
+
+
+            ArrayList<TransactionInput> inputs = new ArrayList<>();
+
+            Double total = 0.0;
+            for (Map.Entry<String, TransactionOutput> item : utx0Map.entrySet()) {
+                TransactionOutput utx0 = item.getValue();
+                total += utx0.getValue();
+                inputs.add(new TransactionInput(utx0.getID()));
+                if (total > value) {
+                    break;
+                }
+            }
+
+            Transaction transaction = new Transaction(publicKey, recipient, value, inputs);
+            transaction.generateSignature(privateKey);
+
+            for (TransactionInput input : inputs) {
+                utx0Map.remove(input.getId());
+            }
+
+            return transaction;
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
             return null;
         }
-
-        ArrayList<TransactionInput> inputs = new ArrayList<>();
-
-        Double total = 0.0;
-        for (Map.Entry<String, TransactionOutput> item : utx0Map.entrySet()) {
-            TransactionOutput utx0 = item.getValue();
-            total += utx0.getValue();
-            inputs.add(new TransactionInput(utx0.getID()));
-            if (total > value) {
-                break;
-            }
-        }
-
-        Transaction transaction = new Transaction(publicKey, recipient, value, inputs);
-        transaction.generateSignature(privateKey);
-
-        for (TransactionInput input : inputs) {
-            utx0Map.remove(input.getId());
-        }
-
-        return transaction;
     }
 
     public PrivateKey getPrivateKey() {
