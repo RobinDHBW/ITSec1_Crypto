@@ -34,7 +34,7 @@ public class Console implements IConsole {
     @Override
     public void writeln(ConsoleCorrespondation input, TextColor color) {
         List<ConsoleCorrespondation> ccEvents = Arrays.asList(ConsoleCorrespondation.CL_LAUNCH, ConsoleCorrespondation.CL_SHOWRECIPIENT, ConsoleCorrespondation.M_TRANSACTIONSUCCESS, ConsoleCorrespondation.M_BUSTED);
-        List<ConsoleCorrespondation> finEvents = Arrays.asList(ConsoleCorrespondation.CL_EXCHANGE, ConsoleCorrespondation.CL_SHOWBALANCE, ConsoleCorrespondation.CL_SHOWRECIPIENT, ConsoleCorrespondation.CL_PAYBTC, ConsoleCorrespondation.CL_CHECKPAYMENT, ConsoleCorrespondation.M_ENCRYPTED, ConsoleCorrespondation.M_RANSOMINCREASED);
+        List<ConsoleCorrespondation> finEvents = Arrays.asList(ConsoleCorrespondation.CL_EXCHANGE, ConsoleCorrespondation.CL_SHOWBALANCE, ConsoleCorrespondation.CL_SHOWRECIPIENT, ConsoleCorrespondation.CL_PAYBTC, ConsoleCorrespondation.CL_CHECKPAYMENT, ConsoleCorrespondation.M_ENCRYPTED, ConsoleCorrespondation.M_RANSOMINCREASED, ConsoleCorrespondation.M_RANSOMFINAL);
 
         System.out.println(color.getValue() + input.getValue() + ansiReset);
 
