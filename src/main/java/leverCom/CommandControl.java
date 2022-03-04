@@ -55,6 +55,10 @@ public class CommandControl extends Subscriber implements IConsoleUser {
                 ConsoleCorrespondation.M_SHOWRECIPIENT.setValue(ConsoleCorrespondation.M_SHOWRECIPIENT.getValue() + this.encodePublicKey(this.targetWallet.getPublicKey()));
                 this.writeToConsole(ConsoleCorrespondation.M_SHOWRECIPIENT, TextColor.GREEN);
             }
+            case M_BUSTED -> {
+                this.pressurize.cancelTimer();
+                AttackComplex.getInstance().hePaid();
+            }
         }
     }
 

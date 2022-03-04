@@ -17,7 +17,6 @@ import person.Victim;
 import pressurize.Pressurize;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -70,7 +69,7 @@ public class AttackComplex {
     }
 
     private void payAtRandomMoment() {
-        Integer delay = ThreadLocalRandom.current().nextInt(340000, 360000);;
+        Integer delay = ThreadLocalRandom.current().nextInt(Configuration.instance.minTimer, Configuration.instance.maxTimer);
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -88,10 +87,12 @@ public class AttackComplex {
     }
 
     public void start() {
+        Double minTimerInMin = Configuration.instance.minTimer.doubleValue() / 60000;
+        Double maxTimerInMin = Configuration.instance.maxTimer.doubleValue() / 60000;
         this.console.writeln("************************************", TextColor.YELLOW);
         this.console.writeln("* Start szenario 'AttackComplex'   *", TextColor.YELLOW);
         this.console.writeln("* This will run a random time      *", TextColor.YELLOW);
-        this.console.writeln("* between 4:30 min and 6:00 min    *", TextColor.YELLOW);
+        this.console.writeln("* between " + minTimerInMin + " min and " + maxTimerInMin + " min      *", TextColor.YELLOW);
         this.console.writeln("* Feel free to lean back and relax *", TextColor.YELLOW);
         this.console.writeln("************************************", TextColor.YELLOW);
 
@@ -100,7 +101,7 @@ public class AttackComplex {
     }
 
     public void hePaid() {
-        if(Objects.nonNull(timer)) {
+        if (Objects.nonNull(timer)) {
             timer.cancel();
             timer.purge();
         }

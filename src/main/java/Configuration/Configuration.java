@@ -16,8 +16,10 @@ public enum Configuration {
     public final String pathToJavaArchive = userDirectory + fileSeparator + "ITSec1_Crypto_Component" + fileSeparator + "jar" + fileSeparator;
     public final String pathToJarsigner = "C:" + fileSeparator + "Program Files" + fileSeparator + "Java" + fileSeparator + "jdk-17.0.2" + fileSeparator + "bin" + fileSeparator + "jarsigner";
 
-    public final Integer difficulty = 5;
+    public final Integer minTimer = 270000;
+    public final Integer maxTimer = 360000;
 
+    public final Integer difficulty = 5;
     public Transaction genesisTransaction;
     public HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     public Double minimumTransaction = 0.001;
