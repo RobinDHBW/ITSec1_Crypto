@@ -7,6 +7,7 @@ import financial.Wallet;
 import person.Miner;
 import szenario.Attack;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import szenario.AttackComplex;
 
 import java.security.PublicKey;
 import java.security.Security;
@@ -23,6 +24,9 @@ public class Application {
 
             Attack attack = Attack.getInstance();
             attack.start();
+
+            AttackComplex attackComplex = AttackComplex.getInstance();
+            attackComplex.start();
         }catch (Exception ex){
             System.err.println(ex.getMessage());
             ex.printStackTrace();

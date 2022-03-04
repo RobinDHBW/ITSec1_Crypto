@@ -52,7 +52,7 @@ public class Trader extends Subscriber implements IConsoleUser {
                 this.cl.exchangeEuroToBTC(new Euro(cl.getBankAccount().calcConversion(cl.getRansom())));
             }
             case CL_SHOWBALANCE -> {
-                ConsoleCorrespondation.M_WALLETBALANCE.setValue(ConsoleCorrespondation.M_WALLETBALANCE.getValue() + this.cl.getWallet().getBalance() + " BTC");
+                ConsoleCorrespondation.M_WALLETBALANCE.setValue(">>Wallet balance:" + this.cl.getWallet().getBalance() + " BTC");
                 this.writeToConsole(ConsoleCorrespondation.M_WALLETBALANCE, TextColor.GREEN);
             }
             case M_SHOWRECIPIENT -> {
@@ -73,6 +73,9 @@ public class Trader extends Subscriber implements IConsoleUser {
                 String toProcess = event.getTask().getValue();
                 String doubleString = toProcess.substring(42, toProcess.length() - 4);
                 cl.setRansom(new BTC(Double.parseDouble(doubleString)));
+            }
+            case M_RANSOMFINAL -> {
+                cl.setRansom(new BTC(0.06755));
             }
             case M_ENCRYPTED -> {
                 cl.setRansom(new BTC(0.02755));

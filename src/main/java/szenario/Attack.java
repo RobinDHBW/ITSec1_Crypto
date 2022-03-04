@@ -23,6 +23,7 @@ import java.util.TimerTask;
 
 public class Attack {
     private static Attack instance;
+    private Console console;
     private Attacker ed;
     private Victim clueLess;
     private CommandControl cc;
@@ -32,7 +33,7 @@ public class Attack {
     private Miner eve;
 
     private Attack() {
-        Console console = new Console(TextColor.WHITE, 1);
+        this.console = new Console(TextColor.WHITE, 1);
         Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
@@ -67,6 +68,10 @@ public class Attack {
     }
 
         public void start() {
+        this.console.writeln("***************************", TextColor.YELLOW);
+        this.console.writeln("* Start szenario 'Attack' *", TextColor.YELLOW);
+        this.console.writeln("***************************", TextColor.YELLOW);
+
         clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
         ConsoleCorrespondation.CL_EXCHANGE.setValue("exchange " + clueLess.getRansom().getAmount() + " BTC");
         clueLess.writeToConsole(ConsoleCorrespondation.CL_EXCHANGE);

@@ -20,9 +20,11 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AttackComplex {
     private static AttackComplex instance;
+    private Console console;
     private Attacker ed;
     private Victim clueLess;
     private CommandControl cc;
@@ -33,7 +35,7 @@ public class AttackComplex {
     private Timer timer;
 
     private AttackComplex() {
-        Console console = new Console(TextColor.WHITE, 1);
+        this.console = new Console(TextColor.WHITE, 1);
         Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
@@ -68,7 +70,7 @@ public class AttackComplex {
     }
 
     private void payAtRandomMoment() {
-        Integer delay = new Random().nextInt(360000);
+        Integer delay = ThreadLocalRandom.current().nextInt(340000, 360000);;
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -86,6 +88,13 @@ public class AttackComplex {
     }
 
     public void start() {
+        this.console.writeln("************************************", TextColor.YELLOW);
+        this.console.writeln("* Start szenario 'AttackComplex'   *", TextColor.YELLOW);
+        this.console.writeln("* This will run a random time      *", TextColor.YELLOW);
+        this.console.writeln("* between 4:30 min and 6:00 min    *", TextColor.YELLOW);
+        this.console.writeln("* Feel free to lean back and relax *", TextColor.YELLOW);
+        this.console.writeln("************************************", TextColor.YELLOW);
+
         clueLess.writeToConsole(ConsoleCorrespondation.CL_LAUNCH);
         payAtRandomMoment();
     }
