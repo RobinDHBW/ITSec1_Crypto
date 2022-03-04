@@ -17,9 +17,9 @@ public class Application {
     {
         try {
             //Security.addProvider(new BouncyCastleProvider());
-            ProcessBuilder processBuilder = new ProcessBuilder(Configuration.instance.pathToJarsigner, "-verify", Configuration.instance.pathToJavaArchive+"ITSec1_Crypto_Component.jar");
-            Process process = processBuilder.start();
-            process.waitFor();
+            //ProcessBuilder processBuilder = new ProcessBuilder(Configuration.instance.pathToJarsigner, "-verify", Configuration.instance.pathToJavaArchive+"ITSec1_Crypto_Component.jar");
+            //Process process = processBuilder.start();
+            //process.waitFor();
 
 
             Attack attack = Attack.getInstance();
