@@ -2,22 +2,18 @@ package financial;
 
 import blockchain.Network;
 import com.google.common.eventbus.Subscribe;
-import configuration.Configuration;
 import configuration.ConsoleCorrespondation;
 import console.Console;
 import console.Subscriber;
 import console.TextColor;
 import currency.BTC;
 import currency.Euro;
-import events.AttackEvent;
 import events.VictimEvent;
 import person.IConsoleUser;
 import person.Victim;
 
 import java.security.KeyFactory;
 import java.security.PublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -25,7 +21,6 @@ public class Trader extends Subscriber implements IConsoleUser {
     private Console console;
     private Victim cl;
     private PublicKey recipient;
-   // private BTC toPay;// = new BTC(0.02755);
 
     public Trader(Integer id, Console console, Victim cl, PublicKey recipient) {
         super(id);

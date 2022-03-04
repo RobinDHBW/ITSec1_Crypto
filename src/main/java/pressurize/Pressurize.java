@@ -65,9 +65,11 @@ public class Pressurize implements IConsoleUser {
     }
 
     public void cancelTimer() {
-        this.timer.cancel();
-        this.timer.purge();
-        this.timer = null;
+        if(Objects.nonNull(this.timer)) {
+            this.timer.cancel();
+            this.timer.purge();
+            this.timer = null;
+        }
     }
 
     @Override

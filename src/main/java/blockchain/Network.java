@@ -1,16 +1,10 @@
 package blockchain;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
-import com.google.gson.GsonBuilder;
 import configuration.Configuration;
 import currency.BTC;
 import financial.Wallet;
@@ -19,9 +13,7 @@ import person.Miner;
 public class Network {
     private static Network instance;
     private List<Miner> miners = new ArrayList<>();
-    //private HashMap<String, TransactionOutput> utx0Map = new HashMap<>();
     private ArrayList<Block> network = new ArrayList<>();
-    //private Transaction genesisBlockTransaction;
     private Block previousBlock;
     private Wallet satoshiNakamoto = new Wallet();
     private int sequence;
@@ -37,7 +29,6 @@ public class Network {
     }
 
     public void addBlock(Block newBlock) {
-        //Miner m = miners.get(ThreadLocalRandom.current().nextInt(miners.size()) % miners.size());
         newBlock.mine(Configuration.instance.difficulty);
         this.network.add(newBlock);
         this.previousBlock = newBlock;
@@ -57,7 +48,6 @@ public class Network {
     public static Network getInstance() {
         if (instance == null) {
             instance = new Network();
-            //instance.setup();
         }
         return instance;
     }
@@ -95,8 +85,6 @@ public class Network {
     public boolean isPaid(){
         Block block;
         String hashTarget = Utility.getDifficultyString(Configuration.instance.difficulty);
-        HashMap<String, TransactionOutput> tempUtx0 = new HashMap<>();
-        tempUtx0.put(Configuration.instance.genesisTransaction.getOutputs().get(0).getID(), Configuration.instance.genesisTransaction.getOutputs().get(0));
 
         for (int i = 1; i < this.network.size(); i++){
             block = this.network.get(i);
@@ -110,6 +98,10 @@ public class Network {
         }
 
         return true;
+    }
+
+    public void addMiner(Miner m){
+        this.miners.add(m);
     }
 
     public Wallet getSatoshiNakamoto() {

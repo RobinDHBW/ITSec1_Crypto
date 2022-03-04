@@ -17,9 +17,6 @@ import person.Victim;
 import pressurize.Pressurize;
 
 import java.util.Objects;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Attack {
     private static Attack instance;
@@ -37,9 +34,9 @@ public class Attack {
         Pressurize pressurize = new Pressurize(console, 60000L);
         ed = new Attacker("Ed", 1);
         clueLess = new Victim("Clue Less", console, 1);
-        sam = new Miner("Sam", 0);
-        bob = new Miner("Bob", 1);
-        eve = new Miner("Eve", 2);
+        Network.getInstance().addMiner(sam = new Miner("Sam", 0));
+        Network.getInstance().addMiner(bob = new Miner("Bob", 1));
+        Network.getInstance().addMiner(eve = new Miner("Eve", 2));
 
         cc = new CommandControl(1, console, pressurize, ed.getWallet());
         trader = new Trader(1, console, clueLess, ed.getWallet().getPublicKey());

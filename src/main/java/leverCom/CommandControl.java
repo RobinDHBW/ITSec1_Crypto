@@ -10,7 +10,6 @@ import events.AttackEvent;
 import financial.Wallet;
 import person.IConsoleUser;
 import pressurize.Pressurize;
-import szenario.Attack;
 import szenario.AttackComplex;
 
 import java.security.PublicKey;

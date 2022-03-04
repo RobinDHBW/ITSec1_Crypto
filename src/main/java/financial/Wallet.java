@@ -7,8 +7,6 @@ import currency.Currency;
 import currency.Euro;
 
 import java.security.*;
-import java.security.spec.ECGenParameterSpec;
-import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

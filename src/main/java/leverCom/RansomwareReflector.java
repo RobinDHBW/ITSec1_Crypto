@@ -1,7 +1,6 @@
 package leverCom;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class RansomwareReflector {
     private Object port;
