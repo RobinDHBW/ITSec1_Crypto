@@ -94,9 +94,6 @@ public class Network {
             if (!current.getHash().equals(current.calculateHash())){
                 return false;
             }
-            if(!previous.getHash().equals(current.getPreviousHash())){
-                return false;
-            }
             if(!current.getHash().substring(0, Configuration.instance.difficulty).equals(hashTarget)){
                 return false;
             }
