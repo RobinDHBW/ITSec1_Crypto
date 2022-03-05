@@ -30,12 +30,12 @@ public class Transaction {
 
     public void generateSignature(PrivateKey privateKey) {
         String data = Utility.getStringFromKey(sender) + Utility.getStringFromKey(recipient) + value;
-        signature = Utility.applyRSASig(privateKey, data);
+        signature = Utility.applySig(privateKey, data);
     }
 
     public boolean verifySignature() {
         String data = Utility.getStringFromKey(sender) + Utility.getStringFromKey(recipient) + value;
-        return Utility.verifyRSASig(sender, data, signature);
+        return Utility.verifySig(sender, data, signature);
 
     }
 

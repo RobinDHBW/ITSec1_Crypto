@@ -20,15 +20,14 @@ public class Utility {
         } catch (Exception e) { throw new RuntimeException(e); }
     }
 
-    public static byte[] applyRSASig(PrivateKey privateKey, String input) {
+    public static byte[] applySig(PrivateKey privateKey, String input) {
         Signature dsa;
         byte[] output;
 
         try {
-            dsa = Signature.getInstance("SHA256withRSA");
+            dsa = Signature.getInstance("SHA256withECDSA");
             dsa.initSign(privateKey);
-            byte[] strByte = input.getBytes();
-            dsa.update(strByte);
+            dsa.update(input.getBytes());
             output = dsa.sign();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -37,12 +36,12 @@ public class Utility {
         return output;
     }
 
-    public static boolean verifyRSASig(PublicKey publicKey, String data, byte[] signature) {
+    public static boolean verifySig(PublicKey publicKey, String data, byte[] signature) {
         try {
-            Signature ecdsaVerify = Signature.getInstance("SHA256withRSA");
-            ecdsaVerify.initVerify(publicKey);
-            ecdsaVerify.update(data.getBytes());
-            return ecdsaVerify.verify(signature);
+            Signature sig = Signature.getInstance("SHA256withECDSA");
+            sig.initVerify(publicKey);
+            sig.update(data.getBytes());
+            return sig.verify(signature);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

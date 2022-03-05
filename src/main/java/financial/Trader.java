@@ -58,7 +58,7 @@ public class Trader extends Subscriber implements IConsoleUser {
             }
             case CL_CHECKPAYMENT -> {
                 Network.getInstance().check();
-                if (Network.getInstance().isPaid()) {
+                if (Network.getInstance().checkBlockchainValidity()) {
                     this.writeToConsole(ConsoleCorrespondation.M_TRANSACTIONSUCCESS, TextColor.GREEN);
                 } else {
                     this.writeToConsole(ConsoleCorrespondation.M_TRANSACTIONFAIL, TextColor.RED);
